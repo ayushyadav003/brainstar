@@ -7,9 +7,10 @@ body {
 body {
   background: #202020;
   color: #e6f2fe;
+  padding: 0;
+  margin: 0;
 }
-.dashboardBody{
-  
+.dashboardBody {
 }
 a {
   color: inherit;

@@ -11,36 +11,60 @@ const classes = [
 
 function Classes() {
   const [addClass, setAddClass] = useState(false)
+  const [currentScreen, setCurrentScreen] = useState('classes')
 
   return (
     <div className={styles.classContainer}>
-      <div className={styles.plusIcon} onClick={() => setAddClass(true)}>
-        +
-      </div>
-      {classes.map((classInfo, i) => (
-        <div
-          key={i}
-          className={styles.cardsWrapper}
-          style={{ background: classInfo.bg }}
+      <div className={styles.optionBar}>
+        <span
+          onClick={() => setCurrentScreen('classes')}
+          style={{
+            backgroundColor: currentScreen !== 'classes' && '#fff',
+            color: currentScreen !== 'classes' && 'brown',
+          }}
         >
-          <p className={styles.mainTitle}> {classInfo.title}</p>
-          <div className={styles.innerInfo}>
-            <div>
+          Classes
+        </span>
+        <span
+          onClick={() => setCurrentScreen('batches')}
+          style={{
+            backgroundColor: currentScreen !== 'batches' && '#fff',
+            color: currentScreen !== 'batches' && 'brown',
+          }}
+        >
+          Batches
+        </span>
+      </div>
+      <div className={styles.classWrapper}>
+        <div className={styles.plusIcon} onClick={() => setAddClass(true)}>
+          +
+        </div>
+        {classes.map((classInfo, i) => (
+          <div
+            key={i}
+            className={styles.cardsWrapper}
+            style={{ background: classInfo.bg }}
+          >
+            <p className={styles.mainTitle}> {classInfo.title}</p>
+            <div className={styles.innerInfo}>
               <div>
-                <span className={styles.title}>Total students:</span>
-                <span className={styles.titleInfo}>
-                  {classInfo.totalStudents}
-                </span>
-              </div>
-              <div>
-                <span className={styles.title}>Total Batches:</span>
-                <span className={styles.titleInfo}>{classInfo.batches}</span>
+                <div>
+                  <span className={styles.title}>Total students:</span>
+                  <span className={styles.titleInfo}>
+                    {classInfo.totalStudents}
+                  </span>
+                </div>
+                <div>
+                  <span className={styles.title}>Total Batches:</span>
+                  <span className={styles.titleInfo}>{classInfo.batches}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
-      <AddPopup type="class" open={addClass} setOpen={setAddClass} />
+        ))}
+        <AddPopup type="class" open={addClass} setOpen={setAddClass} />
+      </div>
+      <div></div>
     </div>
   )
 }

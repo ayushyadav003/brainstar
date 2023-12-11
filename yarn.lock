@@ -267,7 +267,7 @@
   dependencies:
     "@babel/runtime" "^7.23.4"
 
-"@mui/material@^5.0.0", "@mui/material@^5.14.19":
+"@mui/material@^5.0.0", "@mui/material@^5.14.19", "@mui/material@^5.4.1":
   version "5.14.19"
   resolved "https://registry.npmjs.org/@mui/material/-/material-5.14.19.tgz"
   integrity sha512-jSPLXst/YPgDGolhiu4rbethKjLVrI1IkoK8YrFUv8ygxDuhQdsE6+ZqjSSRXk3ytTMf6ghPnQ88OFRk4XjpNw==
@@ -304,7 +304,7 @@
     csstype "^3.1.2"
     prop-types "^15.8.1"
 
-"@mui/system@^5.14.19":
+"@mui/system@^5.14.19", "@mui/system@^5.4.1":
   version "5.14.19"
   resolved "https://registry.npmjs.org/@mui/system/-/system-5.14.19.tgz"
   integrity sha512-4e3Q+2nx+vgEsd0h5ftxlZGB7XtkkPos/zWqCqnxUs1l/T70s0lF2YNrWHHdSQ7LgtBu0eQ0qweZG2pR7KwkAw==
@@ -323,7 +323,7 @@
   resolved "https://registry.npmjs.org/@mui/types/-/types-7.2.10.tgz"
   integrity sha512-wX1vbDC+lzF7FlhT6A3ffRZgEoKWPF8VqRoTu4lZwouFX2t90KyCMsgepMw5DxLak1BSp/KP86CmtZttikb/gQ==
 
-"@mui/utils@^5.14.19":
+"@mui/utils@^5.14.16", "@mui/utils@^5.14.19":
   version "5.14.19"
   resolved "https://registry.npmjs.org/@mui/utils/-/utils-5.14.19.tgz"
   integrity sha512-qAHvTXzk7basbyqPvhgWqN6JbmI2wLB/mf97GkSlz5c76MiKYV6Ffjvw9BjKZQ1YRb8rDX9kgdjRezOcoB91oQ==
@@ -332,6 +332,17 @@
     "@types/prop-types" "^15.7.11"
     prop-types "^15.8.1"
     react-is "^18.2.0"
+
+"@mui/x-data-grid@^6.18.4":
+  version "6.18.4"
+  resolved "https://registry.npmjs.org/@mui/x-data-grid/-/x-data-grid-6.18.4.tgz"
+  integrity sha512-uiinfqioCRoesUlJF3gvh67Ja3TrJJvPRTu4Gkf/RQBjr0BDNQ8BJrnuffqD8D/0SVUiqRZvcrjtgG1BIyjKRw==
+  dependencies:
+    "@babel/runtime" "^7.23.2"
+    "@mui/utils" "^5.14.16"
+    clsx "^2.0.0"
+    prop-types "^15.8.1"
+    reselect "^4.1.8"
 
 "@next/env@14.0.3":
   version "14.0.3"
@@ -2160,6 +2171,11 @@ regexp.prototype.flags@^1.5.0, regexp.prototype.flags@^1.5.1:
     call-bind "^1.0.2"
     define-properties "^1.2.0"
     set-function-name "^2.0.0"
+
+reselect@^4.1.8:
+  version "4.1.8"
+  resolved "https://registry.npmjs.org/reselect/-/reselect-4.1.8.tgz"
+  integrity sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==
 
 resolve-from@^4.0.0:
   version "4.0.0"

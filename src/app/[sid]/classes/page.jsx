@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
-import styles from './dashboard.module.scss'
+import styles from './classes.module.scss'
+import AddPopup from '../../../components/addPopup/AddPopup'
 
 const classes = [
   { title: '10th', totalStudents: '20', batches: '4', bg: '#7a6038' },
@@ -8,9 +9,14 @@ const classes = [
   { title: '12th', totalStudents: '20', batches: '4', bg: '#ce796b' },
 ]
 
-function Dashboard() {
+function Classes() {
+  const [addClass, setAddClass] = useState(false)
+
   return (
-    <div className={styles.dashboardContainer}>
+    <div className={styles.classContainer}>
+      <div className={styles.plusIcon} onClick={() => setAddClass(true)}>
+        +
+      </div>
       {classes.map((classInfo, i) => (
         <div
           key={i}
@@ -34,8 +40,9 @@ function Dashboard() {
           </div>
         </div>
       ))}
+      <AddPopup type="class" open={addClass} setOpen={setAddClass} />
     </div>
   )
 }
 
-export default Dashboard
+export default Classes

@@ -35,36 +35,41 @@ function Classes() {
           Batches
         </span>
       </div>
-      <div className={styles.classWrapper}>
-        <div className={styles.plusIcon} onClick={() => setAddClass(true)}>
-          +
-        </div>
-        {classes.map((classInfo, i) => (
-          <div
-            key={i}
-            className={styles.cardsWrapper}
-            style={{ background: classInfo.bg }}
-          >
-            <p className={styles.mainTitle}> {classInfo.title}</p>
-            <div className={styles.innerInfo}>
-              <div>
+      {currentScreen === 'batches' ? (
+        <div className={styles.classWrapper}>hi</div>
+      ) : (
+        <div className={styles.classWrapper}>
+          <div className={styles.plusIcon} onClick={() => setAddClass(true)}>
+            +
+          </div>
+          {classes.map((classInfo, i) => (
+            <div
+              key={i}
+              className={styles.cardsWrapper}
+              style={{ background: classInfo.bg }}
+            >
+              <p className={styles.mainTitle}> {classInfo.title}</p>
+              <div className={styles.innerInfo}>
                 <div>
-                  <span className={styles.title}>Total students:</span>
-                  <span className={styles.titleInfo}>
-                    {classInfo.totalStudents}
-                  </span>
-                </div>
-                <div>
-                  <span className={styles.title}>Total Batches:</span>
-                  <span className={styles.titleInfo}>{classInfo.batches}</span>
+                  <div>
+                    <span className={styles.title}>Total students:</span>
+                    <span className={styles.titleInfo}>
+                      {classInfo.totalStudents}
+                    </span>
+                  </div>
+                  <div>
+                    <span className={styles.title}>Total Batches:</span>
+                    <span className={styles.titleInfo}>
+                      {classInfo.batches}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-        <AddPopup type="class" open={addClass} setOpen={setAddClass} />
-      </div>
-      <div></div>
+          ))}
+          <AddPopup type="class" open={addClass} setOpen={setAddClass} />
+        </div>
+      )}
     </div>
   )
 }

@@ -2,74 +2,50 @@
 import React, { useState } from 'react'
 import styles from './classes.module.scss'
 import AddPopup from '../../../components/addPopup/AddPopup'
+import { School } from '@mui/icons-material'
+import { Divider } from '@mui/material'
 
 const classes = [
-  { title: '10th', totalStudents: '20', batches: '4', bg: '#7a6038' },
-  { title: '11th', totalStudents: '20', batches: '4', bg: '#7e4b34' },
-  { title: '12th', totalStudents: '20', batches: '4', bg: '#ce796b' },
+  { title: '1st', totalStudents: '20', batches: '04', bg: '#ce796b' },
+  { title: '2nd', totalStudents: '20', batches: '04', bg: '#7a6038' },
+  { title: '3rd', totalStudents: '20', batches: '04', bg: '#7e4b34' },
+  { title: '4th', totalStudents: '20', batches: '04', bg: '#7a6038' },
+  { title: '5th', totalStudents: '20', batches: '04', bg: '#ce796b' },
+  { title: '6th', totalStudents: '20', batches: '04', bg: '#7e4b34' },
+  { title: '7th', totalStudents: '20', batches: '04', bg: '#7a6038' },
+  { title: '8th', totalStudents: '20', batches: '04', bg: '#ce796b' },
+  { title: '9th', totalStudents: '20', batches: '04', bg: '#7e4b34' },
+  { title: '10th', totalStudents: '20', batches: '04', bg: '#ce796b' },
+  { title: '11th', totalStudents: '20', batches: '04', bg: '#7a6038' },
+  { title: '12th', totalStudents: '20', batches: '04', bg: '#7e4b34' },
 ]
 
 function Classes() {
   const [addClass, setAddClass] = useState(false)
+  const [selectedClass, setSelectedClass] = useState('12th')
   const [currentScreen, setCurrentScreen] = useState('classes')
 
   return (
     <div className={styles.classContainer}>
-      <div className={styles.optionBar}>
-        <span
-          onClick={() => setCurrentScreen('classes')}
-          style={{
-            backgroundColor: currentScreen !== 'classes' && '#fff',
-            color: currentScreen !== 'classes' && 'brown',
-          }}
-        >
-          Classes
-        </span>
-        <span
-          onClick={() => setCurrentScreen('batches')}
-          style={{
-            backgroundColor: currentScreen !== 'batches' && '#fff',
-            color: currentScreen !== 'batches' && 'brown',
-          }}
-        >
-          Batches
-        </span>
-      </div>
-      {currentScreen === 'batches' ? (
-        <div className={styles.classWrapper}>hi</div>
-      ) : (
-        <div className={styles.classWrapper}>
-          <div className={styles.plusIcon} onClick={() => setAddClass(true)}>
-            +
+      <div className={styles.cardsWrapper}>
+        {classes.map((classInfo, i) => (
+          <div
+            key={i}
+            className={styles.cardWrapper}
+            style={{
+              background:
+                selectedClass === classInfo.title ? classInfo.bg : '#fff',
+              color: selectedClass === classInfo.title ? '#fff' : classInfo.bg,
+            }}
+            onClick={() => setSelectedClass(classInfo.title)}
+          >
+            <p className={styles.mainTitle}> {classInfo.title}</p>
           </div>
-          {classes.map((classInfo, i) => (
-            <div
-              key={i}
-              className={styles.cardsWrapper}
-              style={{ background: classInfo.bg }}
-            >
-              <p className={styles.mainTitle}> {classInfo.title}</p>
-              <div className={styles.innerInfo}>
-                <div>
-                  <div>
-                    <span className={styles.title}>Total students:</span>
-                    <span className={styles.titleInfo}>
-                      {classInfo.totalStudents}
-                    </span>
-                  </div>
-                  <div>
-                    <span className={styles.title}>Total Batches:</span>
-                    <span className={styles.titleInfo}>
-                      {classInfo.batches}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          <AddPopup type="class" open={addClass} setOpen={setAddClass} />
-        </div>
-      )}
+        ))}
+      </div>
+      <div className={styles.divider}></div>
+
+      <AddPopup type="class" open={addClass} setOpen={setAddClass} />
     </div>
   )
 }

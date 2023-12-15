@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import CommonTable from '../../../components/common/Table'
 import styles from './students.module.scss'
 import {
@@ -10,135 +10,137 @@ import {
   Select,
   TextField,
 } from '@mui/material'
+import AddPopup from '@/components/addPopup/AddPopup'
 
-export default function page() {
-  const studentData = [
-    {
-      id: 1,
-      name: 'Ayush',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 2,
-      name: 'Ayush1',
-      phone: '9958109872',
-      class: '11th',
-      batch: '05:00-06:00',
-    },
-    {
-      id: 3,
-      name: 'Ayush2',
-      phone: '9958109872',
-      class: '10th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 4,
-      name: 'Ayush3',
-      phone: '9958109872',
-      class: '9th',
-      batch: '06:00-07:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-    {
-      id: 5,
-      name: 'Ayush4',
-      phone: '9958109872',
-      class: '12th',
-      batch: '04:00-05:00',
-    },
-  ]
+const studentData = [
+  {
+    id: 1,
+    name: 'Ayush',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 2,
+    name: 'Ayush1',
+    phone: '9958109872',
+    class: '11th',
+    batch: '05:00-06:00',
+  },
+  {
+    id: 3,
+    name: 'Ayush2',
+    phone: '9958109872',
+    class: '10th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 4,
+    name: 'Ayush3',
+    phone: '9958109872',
+    class: '9th',
+    batch: '06:00-07:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+  {
+    id: 5,
+    name: 'Ayush4',
+    phone: '9958109872',
+    class: '12th',
+    batch: '04:00-05:00',
+  },
+]
+export default function Student() {
+  const [addStudent, setAddStudent] = useState(false)
 
   const header = ['Sno.', 'Name', 'Phone', 'Class', 'Batch']
 
   return (
     <div className={styles.studentsContainer}>
-      {/* <h2>Students</h2> */}
+      <AddPopup type="students" open={addStudent} setOpen={setAddStudent} />
       <div className={styles.header}>
         <TextField placeholder="Search with student name/username" />
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -175,7 +177,11 @@ export default function page() {
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" style={{ marginLeft: 'auto' }}>
+        <Button
+          variant="contained"
+          style={{ marginLeft: 'auto' }}
+          onClick={() => setAddStudent(true)}
+        >
           New student
         </Button>
       </div>

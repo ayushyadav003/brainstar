@@ -5,8 +5,8 @@ body {
 }
 
 body {
-  background: #202020;
-  color: #e6f2fe;
+  background: #fff;
+  color: #202020;
   padding: 0;
   margin: 0;
 }
@@ -26,6 +26,21 @@ body::-webkit-scrollbar-thumb {
 a {
   color: inherit;
   text-decoration: none;
+}
+.btn-primary {
+  all: unset;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 1rem;
+  border-radius: 8px;
+  padding: 0 24px;
+  background: #6153cd;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  height: 45px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,8 +1,9 @@
 'use client'
 
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { usePathname } from 'next/navigation'
+import Header from '@/components/header/Header'
 import styles from './layout.module.scss'
 import Sidebar from '../components/sidebar/Sidebar'
 
@@ -13,16 +14,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()?.split('/')
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className={styles.dashboardLayout}>
-          <div></div>
-          <div className={styles.dashboard}>
-            <Sidebar />
-            <div className={styles.dashboardBody}>{children}</div>
+        {pathname[2] ? (
+          <div className={styles.dashboardLayout}>
+            <div></div>
+            <div className={styles.dashboard}>
+              <Sidebar />
+              <div className={styles.dashboardBody}>{children}</div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>
+            <Header />
+          </div>
+        )}
       </body>
     </html>
   )

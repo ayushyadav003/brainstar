@@ -19,7 +19,7 @@ const sidebarOptions = [
 ]
 
 function Sidebar() {
-  const pathname = usePathname().split('/')
+  const pathname = usePathname()?.split('/')
   return (
     <div className={styles.sidebarContainer}>
       <div className={styles.dp}></div>

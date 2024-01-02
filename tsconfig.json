@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/[sid]/dashboard/page.tsx",
-    "src/app/[sid]/classes/page.jsx"
+    "src/app/[sid]/classes/page.jsx",
+    "src/components/testimonials/Testimonials.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,11 @@
+'use client'
 import Image from 'next/image'
-import styles from './page.module.css'
+import styles from './page.module.scss'
 import { Star } from '@mui/icons-material'
+import { services } from '@/utils/Utils'
+import CommonButton from '@/components/common/button/CommonButton'
+import Testimonials from '@/components/testimonials/Testimonials'
+import Blogs from '@/components/blogs/Blogs'
 
 export default function Home() {
   return (
@@ -17,9 +22,9 @@ export default function Home() {
               solutions that drive results and elevate your brand to new
               heights.
             </p>
-            <button>Learn More</button>
+            <CommonButton text={'Get Started'} onclick={''} />
           </div>
-          <div className="inner2">
+          <div className={styles.inner2}>
             <img src="/images/intro.png" alt="home" />
             <div>
               <span>
@@ -32,6 +37,29 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className={styles.servicesWrapper}>
+          <div className={styles.heading}>
+            <h2>Explore Our Services</h2>
+            <p>
+              We are self-service data analytics software that lets you create
+              visually.
+            </p>
+          </div>
+          <div className={styles.servicesData}>
+            {services.map((item, i) => {
+              return (
+                <div key={i}>
+                  <img src={item.icon} alt={item.title} />
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </div>
+              )
+            })}
+          </div>
+          <CommonButton text={'Learn More'} onclick={''} />
+        </div>
+        <Testimonials />
+        <Blogs />
       </div>
     </main>
   )

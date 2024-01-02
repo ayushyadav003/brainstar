@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { testimonials } from '../../utils/Utils'
 import styled from '@emotion/styled'
 
@@ -33,7 +34,7 @@ const Arrows = styled('div')({
 export default function Testimonials() {
   const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0)
 
-  const handleArrowClick = (side: String) => {
+  const handleArrowClick = (side) => {
     if (side === 'left') {
       setCurrentTestimonialSlide(
         (prevSlide) =>

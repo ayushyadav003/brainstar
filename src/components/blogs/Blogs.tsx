@@ -1,6 +1,7 @@
 import React from 'react'
 import { blogs } from '../../utils/Utils'
 import styled from '@emotion/styled'
+import CommonButton from '../common/button/CommonButton'
 
 const BlogContainer = styled('div')({
   padding: '70px 9vw 70px 9vw',
@@ -84,7 +85,7 @@ export default function Blogs() {
           )
         })}
       </BlogsWrapper>
-      <button>View all posts</button>
+      <CommonButton text={'View all posts'} onclick={''} />
     </BlogContainer>
   )
 }

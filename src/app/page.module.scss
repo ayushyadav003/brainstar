@@ -1,0 +1,235 @@
+.homeWrapper {
+  margin-top: 8rem;
+  .introSection {
+    display: flex;
+    padding: 0 8%;
+    gap: 20%;
+    .inner {
+      h1 {
+        color: #2d3748;
+        font-size: 50px;
+        font-weight: 700;
+        margin: 0 0 20px 0;
+        span {
+          color: #6153cd;
+        }
+      }
+      p {
+        color: #47536b;
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0 0 35px 0;
+      }
+    }
+    .inner2 {
+      position: relative;
+      width: 523px;
+      height: 361px;
+
+      div {
+        width: 141px;
+        height: 66px;
+        position: absolute;
+        right: -45px;
+        bottom: -25px;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
+        padding: 10px 20px;
+        span {
+          display: flex;
+          align-items: center;
+          span {
+            color: #1d1d1d;
+            opacity: 0.5;
+            font-size: 12px;
+            margin-left: 4px;
+            font-weight: 700;
+          }
+        }
+        p {
+          display: flex;
+          color: #1d1d1d;
+          margin: 7px 0 0 0;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.2px;
+          span {
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+  .servicesWrapper {
+    background: #fbfbfb;
+    margin-top: 50px;
+    padding: 50px 140px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    h2 {
+      color: #0f0049;
+      font-size: 38px;
+      font-weight: 700;
+      margin: 0;
+    }
+    p {
+      color: #47536b;
+      font-size: 18px;
+      font-weight: 400;
+      margin: 10px 0 0 0;
+    }
+    .servicesData {
+      display: flex;
+      text-align: left;
+      gap: 50px;
+      margin: 60px 0;
+
+      div {
+        img {
+          height: 36px;
+          width: 36px;
+        }
+        h3 {
+          color: #0f0049;
+          font-size: 20px;
+          font-weight: 500;
+        }
+        p {
+          color: #0f0049;
+          font-size: 16px;
+          opacity: 0.5;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .homeWrapper {
+    margin-top: 20px;
+    .introSection {
+      display: grid;
+      padding: 0 10% 0 6.9%;
+      gap: 20%;
+      .inner {
+        h1 {
+          font-size: 30px;
+        }
+        p {
+          color: #47536b;
+          font-size: 18px;
+          font-weight: 500;
+          margin: 0 0 35px 0;
+        }
+      }
+      .inner2 {
+        position: relative;
+        img {
+          width: 300px;
+          height: 300px;
+        }
+        div {
+          width: 141px;
+          height: 66px;
+          position: absolute;
+          right: -45px;
+          bottom: -25px;
+          border-radius: 16px;
+          background: #fff;
+          box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
+          padding: 10px 20px;
+          span {
+            display: flex;
+            align-items: center;
+            span {
+              color: #1d1d1d;
+              opacity: 0.5;
+              font-size: 12px;
+              margin-left: 4px;
+              font-weight: 700;
+            }
+          }
+          p {
+            display: flex;
+            color: #1d1d1d;
+            margin: 7px 0 0 0;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            span {
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+    .companySection {
+      text-align: center;
+      margin-top: 100px;
+      p {
+        color: #000;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.14px;
+        margin: 0 0 25px 0;
+      }
+      div {
+        display: flex;
+        justify-content: center;
+        gap: 70px;
+        img {
+          height: 26px;
+        }
+      }
+    }
+    .servicesWrapper {
+      background: #fbfbfb;
+      margin-top: 100px;
+      padding: 50px 140px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      h2 {
+        color: #0f0049;
+        font-size: 38px;
+        font-weight: 700;
+        margin: 0;
+      }
+      p {
+        color: #47536b;
+        font-size: 18px;
+        font-weight: 400;
+        margin: 15px 0 0 0;
+      }
+      .servicesData {
+        display: flex;
+        text-align: left;
+        gap: 50px;
+        margin: 60px 0;
+
+        div {
+          img {
+            height: 36px;
+            width: 36px;
+          }
+          h3 {
+            color: #0f0049;
+            font-size: 20px;
+            font-weight: 500;
+          }
+          p {
+            color: #0f0049;
+            font-size: 16px;
+            opacity: 0.5;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

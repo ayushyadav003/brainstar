@@ -3,10 +3,10 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { usePathname } from 'next/navigation'
-import Header from '@/components/header/Header'
+import Header from '../components/header/Header'
 import styles from './layout.module.scss'
 import Sidebar from '../components/sidebar/Sidebar'
-import Footer from '@/components/footer/Footer'
+import Footer from '../components/footer/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 

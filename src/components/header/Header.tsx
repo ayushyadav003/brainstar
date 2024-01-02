@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { AccountCircle, Logout } from '@mui/icons-material'
 import Image from 'next/image'
-import { headerTabs } from '@/utils/Utils'
+import { headerTabs } from '../../utils/Utils'
 import styles from './header.module.scss'
 import CommonButton from '../common/button/CommonButton'
 

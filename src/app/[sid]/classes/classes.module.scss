@@ -14,19 +14,37 @@
   .cardsWrapper {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    flex-wrap: wrap;
+    width: fit-content;
     .cardWrapper {
-      transition: all 0.2s ease-in-out;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-      cursor: pointer;
+      width: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 130px;
+      transition: all 0.2s ease-in-out;
       border-radius: 10px;
-      color: #fff;
-      width: fit-content;
-      padding: 5px 10px;
-      .mainTitle {
-        font-size: 1.8em;
+      color: #882ae2;
+      p {
+        font-size: 1.5em;
+        padding: 5px 10px;
         font-weight: 600;
         margin: 0;
+      }
+      span {
+        color: gray;
+        padding: 5px 10px;
+      }
+      div {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border-radius: 0 0 10px 10px;
+        justify-content: space-between;
+        font-size: 14px;
+        padding: 0 10px;
+        color: #fff;
       }
       .innerInfo {
         display: flex;

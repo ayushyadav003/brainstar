@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
 import { AccountCircle, Logout } from '@mui/icons-material'
 import Image from 'next/image'
+import Link from 'next/link'
 import { headerTabs } from '../../utils/Utils'
 import styles from './header.module.scss'
 import CommonButton from '../common/button/CommonButton'
+import AuthPopup from '../auth'
 
 const Header = () => {
   // const { user } = useSelector((state: any) => state.profile)
@@ -21,7 +23,11 @@ const Header = () => {
         </div>
         <div className={styles.options}>
           {headerTabs.map((tab, i) => {
-            return <span key={i}>{tab.title}</span>
+            return (
+              <Link href={tab.link} key={i}>
+                {tab.title}
+              </Link>
+            )
           })}
           {/* {user ? (
           <>
@@ -36,9 +42,10 @@ const Header = () => {
             <Logout style={{ cursor: 'pointer' }} onClick={handleLogout} />
           </>
         ) : ( */}
-          <CommonButton text={'Login'} onclick={''} />
+          <CommonButton text={'Login'} onclick={() => ''} />
         </div>
       </div>
+      <AuthPopup />
     </div>
   )
 }

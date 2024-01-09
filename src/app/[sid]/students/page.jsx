@@ -11,6 +11,7 @@ import {
   TextField,
 } from '@mui/material'
 import AddPopup from '@/components/addPopup/AddPopup'
+import { useRouter } from 'next/navigation'
 
 const studentData = [
   {
@@ -135,6 +136,7 @@ const studentData = [
 ]
 export default function Student() {
   const [addStudent, setAddStudent] = useState(false)
+  const router = useRouter()
 
   const header = ['Sno.', 'Name', 'Phone', 'Class', 'Batch']
 

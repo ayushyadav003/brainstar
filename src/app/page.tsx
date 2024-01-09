@@ -2,9 +2,9 @@
 import Image from 'next/image'
 import styles from './page.module.scss'
 import { Star } from '@mui/icons-material'
-import { services } from '@/utils/Utils'
-import CommonButton from '@/components/common/button/CommonButton'
-import Testimonials from '@/components/testimonials/Testimonials'
+import { services } from '../utils/Utils'
+import CommonButton from '../components/common/button/CommonButton'
+import Testimonials from '../components/testimonials/Testimonials'
 import Blogs from '@/components/blogs/Blogs'
 
 export default function Home() {

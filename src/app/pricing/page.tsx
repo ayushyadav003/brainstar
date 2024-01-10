@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import styles from './Banner.module.scss'
+import styles from './banner.module.scss'
 import { Send } from '@mui/icons-material'
 import { Box, Button } from '@mui/material'
 import { planCards } from '@/utils/Utils'

@@ -7,7 +7,7 @@ import styles from './auth.module.scss'
 export default function AuthPopup() {
   const [loginStatus, setLoginStatus] = useState('login')
   const [newUser, setNewUser] = useState(false)
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const handleClose = () => {
     setOpen(false)

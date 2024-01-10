@@ -5,6 +5,7 @@ import {
   PointOfSale,
   School,
   VideoCall,
+  Description
 } from '@mui/icons-material/'
 import styles from './sidebar.module.scss'
 import Link from 'next/link'
@@ -15,6 +16,7 @@ const sidebarOptions = [
   { title: 'Classes', icon: <LibraryBooks />, link: '/a/classes' },
   { title: 'Meetings', icon: <VideoCall />, link: '/a/meetings' },
   { title: 'Students', icon: <School />, link: '/a/students' },
+  { title: 'Notes', icon: <Description />, link: '/a/notes' },
   { title: 'Accounts', icon: <PointOfSale />, link: '/a/accounts' },
 ]
 

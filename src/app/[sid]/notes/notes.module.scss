@@ -1,0 +1,17 @@
+.notesConatiner{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 2rem;
+  
+  .note{
+    width: 150px;
+    height: 180px;
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    // background-color: red;
+  }
+}

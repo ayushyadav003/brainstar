@@ -5,7 +5,10 @@ import {
   PointOfSale,
   School,
   VideoCall,
-  Description
+  Description,
+  Ballot,
+  SupportAgent,
+  NotificationsActive
 } from '@mui/icons-material/'
 import styles from './sidebar.module.scss'
 import Link from 'next/link'
@@ -17,7 +20,10 @@ const sidebarOptions = [
   { title: 'Meetings', icon: <VideoCall />, link: '/a/meetings' },
   { title: 'Students', icon: <School />, link: '/a/students' },
   { title: 'Notes', icon: <Description />, link: '/a/notes' },
+  { title: 'Attendance', icon: <Ballot />, link: '/a/attendance' },
   { title: 'Accounts', icon: <PointOfSale />, link: '/a/accounts' },
+  { title: 'Support', icon: <SupportAgent />, link: '/a/support' },
+  { title: 'Notice', icon: <NotificationsActive />, link: '/a/notice' },
 ]
 
 function Sidebar() {

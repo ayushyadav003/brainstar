@@ -9,8 +9,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useRouter } from 'next/navigation'
 
 export default function page() {
+
+  const router = useRouter()
 
   const [currentNote, setCurrentNote] = useState(null);
   const [notesList, setNotesList] = useState([
@@ -46,7 +49,7 @@ export default function page() {
       <div className={styles.innerContainer}>
         <div className={styles.header}>
           <div className={styles.leftContent}>
-            <ArrowBackIcon sx={{marginRight:'5px'}}/>
+            <div onClick={() => router.push('')}><ArrowBackIcon sx={{marginRight:'10px',cursor:'pointer'}}/></div>
             <p>Update Notes</p>
           </div>
           <div className={styles.rightContent}>
@@ -88,7 +91,7 @@ export default function page() {
         <div >
           <div className={styles.textEditors}>
             <div className={styles.questionEditor}>
-              <div>Question</div>
+              <h2>Question</h2>
               <CKEditor
 
                 editor={ClassicEditor}
@@ -108,7 +111,7 @@ export default function page() {
               />
             </div>
             <div className={styles.answerEditor}>
-              <div>Answer</div>
+              <h2>Answer</h2>
               <CKEditor
                 editor={ClassicEditor}
                 data={currentNote ? currentNote.ans : ""}

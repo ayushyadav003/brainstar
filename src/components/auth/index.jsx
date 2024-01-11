@@ -14,13 +14,11 @@ export default function AuthPopup() {
   }
 
   return (
-    <Dialog open={open} maxWidth={false}>
+    <Dialog open={true} maxWidth={false}>
       <div className={styles.authModal}>
         <Clear className={styles.closeButton} onClick={handleClose} />
         <img
-          src={
-            'https://t4.ftcdn.net/jpg/03/08/69/75/360_F_308697506_9dsBYHXm9FwuW0qcEqimAEXUvzTwfzwe.jpg'
-          }
+          src={""}
           alt=""
         />
       </div>

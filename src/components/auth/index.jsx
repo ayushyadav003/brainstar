@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Clear } from '@mui/icons-material'
 import { Dialog } from '@mui/material'
 import Login from './login'
+import Signup from './signup'
 import styles from './auth.module.scss'
 
 export default function AuthPopup() {
@@ -15,17 +16,10 @@ export default function AuthPopup() {
 
   return (
     <Dialog open={open} maxWidth={false}>
-      <div className={styles.authModal}>
-        <Clear className={styles.closeButton} onClick={handleClose} />
-        <img
-          src={
-            'https://t4.ftcdn.net/jpg/03/08/69/75/360_F_308697506_9dsBYHXm9FwuW0qcEqimAEXUvzTwfzwe.jpg'
-          }
-          alt=""
-        />
-      </div>
       {newUser ? (
-        ''
+        <div>
+          <Signup onClose={onClose} onBack={() => setLoginStatus('login')} />
+        </div>
       ) : (
         <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
       )}

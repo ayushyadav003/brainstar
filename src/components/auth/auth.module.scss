@@ -1,15 +1,64 @@
-.authModal {
-  position: relative;
-  max-height: 620px;
-  width: 600px;
+.loginModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-height: 720px;
+  max-width: 900px;
   transform: translate(-50%, -50%);
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  img {
-    width: 100%;
-    height: 180px;
-    opacity: 1;
+  border-radius: 20px;
+
+  .main {
+    height: 520px;
+    width: 850px;
+    border-radius: 10px !important;
   }
+
+  .form1 {
+    padding: 40px;
+  }
+
+  img {
+    width: 350px;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    opacity: 1;
+    border-radius: 10px 0 0 10px;
+  }
+
+  form {
+    padding: 1rem 5%;
+
+    .remem {
+      display: flex;
+      font-size: smaller;
+      justify-content: space-between;
+      align-items: center;
+      max-height: 20px;
+    }
+
+    .log {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+  }
+  .hirexl {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    flex-direction: column;
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+  }
+
   .closeButton {
     position: absolute;
     top: -6px;
@@ -23,6 +72,7 @@
     border-radius: 50%;
   }
 }
+
 .loginWrapper {
   form {
     padding: 1rem 5%;
@@ -54,6 +104,29 @@
       justify-content: center;
       gap: 1rem;
       padding: 1rem 0;
+    }
+  }
+}
+.signupModal {
+  padding: 20px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .formAcc {
+    max-height: 350px;
+    display: flex;
+    flex-direction: column;
+
+    Button {
+      max-width: 150px;
+      margin: auto;
     }
   }
 }

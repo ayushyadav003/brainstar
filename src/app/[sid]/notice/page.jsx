@@ -45,7 +45,7 @@ const NotificationPage = () => {
       <div className={styles.header}>
         <h2 className={styles.leftContent}>Notice</h2>
         <div className={styles.rightContent}>
-          <TextField placeholder="Search with student name/username" />
+        <TextField placeholder="Search with student name/username" />
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small-label">Class</InputLabel>
             <Select

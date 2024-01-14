@@ -1,59 +1,66 @@
 'use client'
-import React, { useEffect, useState } from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import styles from './updateNotes.module.scss';
-import TextField from '@mui/material/TextField';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React, { useEffect, useState } from 'react'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import styles from './updateNotes.module.scss'
+import TextField from '@mui/material/TextField'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 import { useRouter } from 'next/navigation'
 
-export default function page() {
-
+export default function UpdateNote0() {
   const router = useRouter()
 
-  const [currentNote, setCurrentNote] = useState(null);
+  const [currentNote, setCurrentNote] = useState(null)
   const [notesList, setNotesList] = useState([
-    { id: "1", ques: "Question 1", ans: "Answer 1" },
-    { id: "2", ques: "Question 2", ans: "Answer 2" },
-    { id: "3", ques: "Question 3", ans: "Answer 3" },
-    { id: "4", ques: "Question 4", ans: "Answer 4" },
-    { id: "5", ques: "Question 5", ans: "Answer 5" },
-    { id: "6", ques: "Question 6", ans: "Answer 6" },
-  ]);
+    { id: '1', ques: 'Question 1', ans: 'Answer 1' },
+    { id: '2', ques: 'Question 2', ans: 'Answer 2' },
+    { id: '3', ques: 'Question 3', ans: 'Answer 3' },
+    { id: '4', ques: 'Question 4', ans: 'Answer 4' },
+    { id: '5', ques: 'Question 5', ans: 'Answer 5' },
+    { id: '6', ques: 'Question 6', ans: 'Answer 6' },
+  ])
 
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState('')
 
   const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+    setAge(event.target.value)
+  }
 
   useEffect(() => {
     if (currentNote) {
       const updatedNotesList = notesList.map((note) =>
-        note.id === currentNote.id ? currentNote : note
-      );
-      setNotesList(updatedNotesList);
+        note.id === currentNote.id ? currentNote : note,
+      )
+      setNotesList(updatedNotesList)
     }
-  }, [currentNote, notesList, setNotesList]);
+  }, [currentNote, notesList, setNotesList])
 
   const handleNoteClick = (note) => {
-    setCurrentNote(note);
-  };
+    setCurrentNote(note)
+  }
 
   return (
     <div className={styles.uodateNotesContainer}>
       <div className={styles.innerContainer}>
         <div className={styles.header}>
           <div className={styles.leftContent}>
-            <div onClick={() => router.push('')}><ArrowBackIcon sx={{marginRight:'10px',cursor:'pointer'}}/></div>
+            <div onClick={() => router.push('')}>
+              <ArrowBackIcon sx={{ marginRight: '10px', cursor: 'pointer' }} />
+            </div>
             <p>Update Notes</p>
           </div>
           <div className={styles.rightContent}>
-            <TextField sx={{ m: 1, minWidth: 120 }} size="small" id="outlined-basic" label="Search" variant="outlined" />
+            <TextField
+              sx={{ m: 1, minWidth: 120 }}
+              size="small"
+              id="outlined-basic"
+              label="Search"
+              variant="outlined"
+            />
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel id="demo-select-small-label">Age</InputLabel>
               <Select
@@ -88,25 +95,24 @@ export default function page() {
             </FormControl>
           </div>
         </div>
-        <div >
+        <div>
           <div className={styles.textEditors}>
             <div className={styles.questionEditor}>
               <h2>Question</h2>
               <CKEditor
-
                 editor={ClassicEditor}
-                data={currentNote ? currentNote.ques : ""}
+                data={currentNote ? currentNote.ques : ''}
                 onReady={(editor) => {
-                  console.log("Editor is ready to use!", editor);
+                  console.log('Editor is ready to use!', editor)
                 }}
                 onChange={(event) => {
-                  console.log(event);
+                  console.log(event)
                 }}
                 onBlur={(event, editor) => {
-                  console.log("Blur.", editor);
+                  console.log('Blur.', editor)
                 }}
                 onFocus={(event, editor) => {
-                  console.log("Focus.", editor);
+                  console.log('Focus.', editor)
                 }}
               />
             </div>
@@ -114,36 +120,43 @@ export default function page() {
               <h2>Answer</h2>
               <CKEditor
                 editor={ClassicEditor}
-                data={currentNote ? currentNote.ans : ""}
+                data={currentNote ? currentNote.ans : ''}
                 onReady={(editor) => {
-                  console.log("Editor is ready to use!", editor);
+                  console.log('Editor is ready to use!', editor)
                 }}
                 onChange={(event) => {
-                  console.log(event);
+                  console.log(event)
                 }}
                 onBlur={(event, editor) => {
-                  console.log("Blur.", editor);
+                  console.log('Blur.', editor)
                 }}
                 onFocus={(event, editor) => {
-                  console.log("Focus.", editor);
+                  console.log('Focus.', editor)
                 }}
               />
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.sidebar} >
+      <div className={styles.sidebar}>
         <div className={styles.header}>
-          <TextField id="outlined-basic" label="Search" variant="outlined" fullWidth />
+          <TextField
+            id="outlined-basic"
+            label="Search"
+            variant="outlined"
+            fullWidth
+          />
         </div>
         {notesList.map((note) => (
-          <p key={note.id} onClick={() => handleNoteClick(note)} className={styles.quesList}>
+          <p
+            key={note.id}
+            onClick={() => handleNoteClick(note)}
+            className={styles.quesList}
+          >
             {note.ques}
           </p>
         ))}
-
       </div>
-
     </div>
   )
 }

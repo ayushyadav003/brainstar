@@ -17,11 +17,16 @@ export default function AuthPopup() {
   return (
     <Dialog open={true} maxWidth={false}>
       <div className={styles.authStyle}>
-        <img
+        <div className={styles.authImg}>
+          <h2>Friendly Login</h2>
+          <h3>Connect with simplicity, login hassle-free for everyday accessibility.</h3>
+        {/* <img
           className={styles.topImage}
-          src={"/images/authimg.png"}
+          src={"/images/authimg3.png"}
           alt="img"
-        />
+        /> */}
+        </div>
+        <div className={styles.authForm}>
         {newUser ? (
           <div>
             <Signup  setNewUser={setNewUser} />
@@ -33,6 +38,7 @@ export default function AuthPopup() {
             className={styles.closeButton}
             onClick={() => setLoginStatus("")}
           />
+          </div>
       </div>
     </Dialog>
   );

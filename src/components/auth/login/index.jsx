@@ -55,13 +55,10 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
             <form action="">
               <div className={styles.heading}>
                 <h1>
-                  Login <span style={{ color: "rgb(179, 179, 179)" }}>/</span>
+                  Login <span style={{ color: "rgb(179, 179, 179)" }}> / </span>
                 </h1>
                 <div className={styles.subheading}>
                   <h1>Sign Up</h1>
-                  <h4 style={{ padding: "0 10px" }}>
-                    Don<span>&#39;</span>t have an account?
-                  </h4>
                 </div>
               </div>
               <div className={styles.fields}>

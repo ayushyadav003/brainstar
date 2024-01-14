@@ -45,208 +45,219 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
 
   return (
     <div className={styles.loginModal}>
-      <div className="main">
-        {loginStatus === 'login' && (
-          <div className={styles.loginForm}>
-            <form action="">
-              <div className={styles.heading}>
-                <h1>
-                  Login <span style={{ color: 'rgb(179, 179, 179)' }}> / </span>
-                </h1>
-                <div className={styles.subheading}>
-                  <h1>Sign Up</h1>
-                </div>
+      {loginStatus === 'login' && (
+        <div className={styles.loginForm}>
+          <form action="">
+            <div className={styles.heading}>
+              <h2>
+                Login <span style={{ color: 'rgb(179, 179, 179)' }}> / </span>
+              </h2>
+              <div className={styles.subheading}>
+                <h2>Sign Up</h2>
               </div>
-              <div className={styles.fields}>
-                <TextField
-                  label="Email/Mobile No."
-                  fullWidth
-                  variant="filled"
-                  margin="normal"
-                />
-                <TextField
-                  label="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  fullWidth
-                  variant="filled"
-                  margin="normal"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <span
-                          style={{ cursor: 'pointer' }}
-                          onClick={handleTogglePasswordVisibility}
-                          edge="end"
-                        >
-                          {showPassword ? (
-                            <VisibilityOffIcon />
-                          ) : (
-                            <VisibilityIcon />
-                          )}
-                        </span>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
-              <div className={styles.remember}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={rememberMe}
-                      onChange={handleRememberMeChange}
-                      sx={{ fontSize: '1px' }}
-                    />
-                  }
-                  label={<span style={{ fontSize: '14px' }}>Remember me</span>}
-                />
-                <span
-                  style={{ cursor: 'pointer', color: 'blue' }}
-                  onClick={() => setLoginStatus('forget')}
-                >
-                  Forgot Password?
-                </span>
-              </div>
-              <div className={styles.bottom}>
-                <div className={styles.loginBtn}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    // onClick={()}
-                    sx={{ borderRadius: '30px', width: '120px' }}
-                  >
-                    Login
-                  </Button>
-                </div>
-                <div className={styles.rightContent}>
-                  <p>
-                    New to HireXL?{' '}
-                    <span
-                      style={{
-                        cursor: 'pointer',
-                        fontSize: '15px',
-                        color: 'blue',
-                      }}
-                      onClick={() => setNewUser(true)}
-                    >
-                      Create Account
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div className={styles.icons}>
-                <FacebookIcon />
-                <TwitterIcon style={{ margin: '0 6px' }} />
-                <InstagramIcon />
-              </div>
-            </form>
-          </div>
-        )}
-
-        {loginStatus === 'forget' && (
-          <div className={styles.forgetModal}>
-            {!resetPassword && (
-              <div className={styles.header}>
-                <IconButton onClick={() => setLoginStatus('login')}>
-                  <ArrowBack />
-                </IconButton>
-                <h1 style={{ margin: '0 1rem' }}>Forget Password</h1>
-              </div>
-            )}
-
-            {resetPassword && (
-              <div className={styles.header}>
-                <IconButton onClick={() => setLoginStatus('login')}>
-                  <ArrowBack />
-                </IconButton>
-                <h1 style={{ margin: '40px' }}>Reset Password</h1>
-              </div>
-            )}
-
-            <form>
-              {!resetPassword && (
-                <div className={styles.emailFields}>
-                  <TextField
-                    variant="filled"
-                    label="Email/Mobile No."
-                    fullWidth
-                    margin="normal"
+            </div>
+            <div className={styles.fields}>
+              <TextField
+                label="Email/Mobile No."
+                fullWidth
+                margin="normal"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
+              />
+              <TextField
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                fullWidth
+                margin="normal"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <span
+                        style={{ cursor: 'pointer' }}
+                        onClick={handleTogglePasswordVisibility}
+                        edge="end"
+                      >
+                        {showPassword ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </span>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            <div className={styles.remember}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={rememberMe}
+                    onChange={handleRememberMeChange}
+                    sx={{ fontSize: '1px' }}
                   />
-                  <div>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSendOTP}
-                      sx={{
-                        borderRadius: '10px',
-                        marginLeft: '100px',
-                        marginTop: '20px',
-                      }}
-                    >
-                      Send OTP
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {showOtpFields && !resetPassword && (
-                <div className={styles.actionButtons}>
-                  <OTPInput
-                    value={otp}
-                    onChange={setOtp}
-                    numInputs={4}
-                    renderSeparator={<span>-</span>}
-                    renderInput={(props) => <input {...props} />}
-                  />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    sx={{ borderRadius: '10px' }}
-                  >
-                    Submit
-                  </Button>
-                </div>
-              )}
-              {resetPassword && (
-                <div>
-                  <div className={styles.resets}>
-                    <TextField
-                      label="New Password"
-                      type="password"
-                      fullWidth
-                      margin="normal"
-                      InputProps={{ sx: { borderRadius: '30px' } }}
-                    />
-                    <TextField
-                      label="Confirm Password"
-                      type="password"
-                      fullWidth
-                      margin="normal"
-                      InputProps={{
-                        sx: { borderRadius: '30px', marginBottom: '20px' },
-                      }}
-                    />
-                  </div>
-                  <Button
-                    className={styles.btnnn}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleResetPassword}
-                    sx={{
-                      borderRadius: '10px',
-                      width: '220px',
-                      margin: 'auto',
+                }
+                label={<span style={{ fontSize: '14px' }}>Remember me</span>}
+              />
+              <span
+                style={{ cursor: 'pointer', color: 'blue' }}
+                onClick={() => setLoginStatus('forget')}
+              >
+                Forgot Password?
+              </span>
+            </div>
+            <div className={styles.bottom}>
+              <Button
+                variant="contained"
+                color="primary"
+                // onClick={()}
+                sx={{ borderRadius: '30px', width: '120px' }}
+              >
+                Login
+              </Button>
+              <div className={styles.rightContent}>
+                <p>
+                  {"Don't have an aaccount? "}
+                  <span
+                    style={{
+                      cursor: 'pointer',
+                      fontSize: '15px',
+                      color: 'blue',
                     }}
+                    onClick={() => setNewUser(true)}
                   >
-                    Reset Password
-                  </Button>
-                </div>
-              )}
-            </form>
+                    Create Account
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className={styles.icons}>
+              <FacebookIcon />
+              <TwitterIcon style={{ margin: '0 6px' }} />
+              <InstagramIcon />
+            </div>
+          </form>
+        </div>
+      )}
+      {loginStatus === 'forget' && (
+        <div className={styles.loginForm}>
+          <div className={styles.heading}>
+            <IconButton onClick={() => setLoginStatus('login')}>
+              <ArrowBack />
+            </IconButton>
+            <h2 style={{ margin: '0 1rem' }}>Forget Password</h2>
           </div>
-        )}
-      </div>
+          <div className={styles.step}>
+            <span>1</span>
+            <p>
+              Please enter your registered email or phone number to get your OTP
+            </p>
+          </div>
+          <div>
+            <TextField
+              label="Email/Mobile No."
+              fullWidth
+              margin="normal"
+              InputProps={{
+                sx: { borderRadius: '30px' },
+              }}
+            />
+            <div>
+              <Button
+                variant="contained"
+                color="primary"
+                // onClick={()}
+                sx={{ borderRadius: '30px', width: '120px', marginTop: '8px' }}
+              >
+                Get OTP
+              </Button>
+            </div>
+
+            <div className={styles.step}>
+              <span>2</span>
+              <p>Enter the your 4 digit OTP</p>
+            </div>
+            <OTPInput
+              value={otp}
+              onChange={setOtp}
+              onInput={(e) => {
+                let value = e.target.value
+                value = value.replace(/[^0-9]/g, '')
+                e.target.value = value
+              }}
+              renderSeparator={'-'}
+              numInputs={4}
+              containerStyle={{
+                margin: '10px 0',
+              }}
+              inputStyle={{
+                width: '55px',
+                height: '50px',
+                borderRadius: '10px',
+                border: '2px solid rgba(0, 0, 0, 0.25)',
+                background: '#fff',
+                color: '#000',
+                fontSize: '20px',
+              }}
+              renderInput={(props) => <input {...props} />}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setLoginStatus('reset')}
+              sx={{
+                borderRadius: '30px',
+                width: '120px',
+                margin: '7px auto auto auto',
+              }}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      )}
+      {loginStatus === 'reset' && (
+        <div className={styles.loginForm}>
+          <div className={styles.heading}>
+            <IconButton onClick={() => setLoginStatus('forget')}>
+              <ArrowBack />
+            </IconButton>
+            <h2 style={{ margin: '0 1rem' }}>Reset Password</h2>
+          </div>
+          <div className={styles.step}>
+            <span>3</span>
+            <p>Please enter your new password</p>
+          </div>
+          <div style={{ marginTop: '1rem' }}>
+            <TextField
+              label="New Password"
+              type="password"
+              fullWidth
+              margin="normal"
+              InputProps={{ sx: { borderRadius: '30px' } }}
+            />
+            <TextField
+              label="Confirm Password"
+              type="password"
+              fullWidth
+              margin="normal"
+              InputProps={{
+                sx: { borderRadius: '30px' },
+              }}
+            />
+          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            // onClick={()}
+            sx={{ borderRadius: '30px', width: '120px' }}
+          >
+            Submit
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

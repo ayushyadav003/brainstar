@@ -1,61 +1,70 @@
 .authStyle {
   display: flex;
-  height: 70vh;
-  width: 65vw;
+  position: relative;
+  width: 900px;
+  height: 450px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  .authImg{
-    width: 50%;
+  .authImg {
+    width: 40%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 5%;
     align-items: center;
+    color: #fff;
+    background-color: #c3cbdc;
+    background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%);
 
-
-  background: #141e30;
-  background: -webkit-linear-gradient(to right, #141e30, #243b55);
-  background: linear-gradient(to right, #141e30, #243b55); 
-    img{
+    img {
       width: 100%;
       margin: auto;
     }
   }
-  .authForm{
-      width: 50%;
+  .authForm {
+    width: 50%;
+    padding: 1rem 2rem;
   }
 
   .closeButton {
     position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: black;
-    color: white;
+    top: 10px;
+    right: 10px;
+    // background-color: black;
+    // color: white;
     cursor: pointer;
     padding: 4px;
-    font-size: 18px;
     border-radius: 50%;
   }
 }
-
 .loginModal {
-  // border: 1px solid red;
-  width: 60%;
-  height: 100%;
-
   .loginForm {
-    padding: 2rem;
-
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      p {
+        margin: 0;
+        font-size: 15px;
+      }
+      span {
+        padding: 5px 10px;
+        border-radius: 50%;
+        background: #000;
+        color: #fff;
+      }
+    }
     .heading {
       display: flex;
-
+      align-items: center;
       .subheading {
         display: flex;
         align-items: center;
         justify-content: space-between;
         color: rgb(179, 179, 179);
       }
-    }
-
-    .fields {
     }
 
     .remember {
@@ -68,18 +77,17 @@
 
     .bottom {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      margin-top: 2rem;
-
-      .loginBtn {
-      }
+      margin-top: 1rem;
 
       .rightContent {
         display: flex;
         align-items: center;
         font-size: 11px;
         flex-direction: column;
+        margin: 1rem 0;
       }
     }
 
@@ -87,65 +95,15 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin: 2rem 0;
-    }
-  }
-
-  //----------------------------------------------------------------------------------------
-
-  .forgetModal {
-    // border: 1px solid red;
-    padding: 2rem;
-
-    .header {
-      display: flex;
     }
   }
 }
-
-// .loginWrapper {
-// form {
-//   padding: 1rem 5%;
-
-//   .remmember {
-//     display: flex;
-//     font-size: smaller;
-//     justify-content: space-between;
-//     align-items: center;
-//     max-height: 20px;
-//   }
-
-//   .loginBtn {
-//     display: flex;
-//     justify-content: center;
-//     margin-top: 2rem;
-//   }
-// }
-// .createAccount {
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-//   span {
-//     color: blue;
-//     cursor: pointer;
-//   }
-//   .icons {
-//     display: flex;
-//     justify-content: center;
-//     gap: 1rem;
-//     padding: 1rem 0;
-//   }
-// }
-// }
-
 .signupModal {
-  padding: 2rem;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
+  width: 100%;
   .header {
     display: flex;
     align-items: center;
+    font-size: 1em;
     .subheading {
       display: flex;
       align-items: center;
@@ -155,13 +113,85 @@
   }
 
   .signUpForm {
-    max-height: 350px;
     display: flex;
     flex-direction: column;
-
     Button {
       max-width: 150px;
-      margin: 2rem auto;
+      margin: 1rem auto auto auto;
+    }
+  }
+  .rightContent {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .authStyle {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    .authImg {
+      display: none;
+    }
+    .authForm {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .closeButton {
+    }
+  }
+  .loginModal {
+    .loginForm {
+      padding: 1rem;
+      .heading {
+        display: flex;
+        .subheading {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: rgb(179, 179, 179);
+        }
+      }
+
+      .remember {
+        display: flex;
+        font-size: smaller;
+        justify-content: space-between;
+        align-items: center;
+        height: 20px;
+      }
+
+      .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 2rem;
+
+        .rightContent {
+          display: flex;
+          align-items: center;
+          font-size: 11px;
+          flex-direction: column;
+        }
+      }
+
+      .icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 10px 0;
+      }
+    }
+    .forgetModal {
+      // border: 1px solid red;
+      padding: 2rem;
+
+      .header {
+        display: flex;
+      }
     }
   }
 }

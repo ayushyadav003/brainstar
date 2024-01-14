@@ -17,24 +17,33 @@ export default function AuthPopup() {
   return (
     <Dialog open={true} maxWidth={false}>
       <div className={styles.authStyle}>
-        <img
+        <div className={styles.authImg}>
+          <h2>Friendly Login</h2>
+          <h3>
+            Connect with simplicity, login hassle-free for everyday
+            accessibility.
+          </h3>
+          {/* <img
           className={styles.topImage}
-          src={'/images/authimg2.jpeg'}
+          src={"/images/authimg3.png"}
           alt="img"
-        />
-        {newUser ? (
-          <Signup setNewUser={setNewUser} />
-        ) : (
-          <Login
-            loginStatus={loginStatus}
-            setLoginStatus={setLoginStatus}
-            setNewUser={setNewUser}
+        /> */}
+        </div>
+        <div className={styles.authForm}>
+          {newUser ? (
+            <Signup setNewUser={setNewUser} />
+          ) : (
+            <Login
+              loginStatus={loginStatus}
+              setLoginStatus={setLoginStatus}
+              setNewUser={setNewUser}
+            />
+          )}
+          <Clear
+            className={styles.closeButton}
+            onClick={() => setLoginStatus('')}
           />
-        )}
-        <Clear
-          className={styles.closeButton}
-          onClick={() => setLoginStatus('')}
-        />
+        </div>
       </div>
     </Dialog>
   )

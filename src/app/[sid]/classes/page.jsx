@@ -29,6 +29,9 @@ function Classes() {
 
   return (
     <div className={styles.classContainer}>
+      <div className={styles.header}>
+        <h1>Classes</h1>
+      </div>
       <div className={styles.cardsWrapper}>
         {classes.map((classInfo, i) => (
           <div

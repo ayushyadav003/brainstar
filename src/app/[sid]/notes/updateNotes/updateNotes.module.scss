@@ -1,49 +1,45 @@
-.uodateNotesContainer{
+.uodateNotesContainer {
   display: flex;
-  
-  .innerContainer{
-    padding: 1rem;
+  width: 100%;
+  .innerContainer {
     width: 70%;
 
-    .header{
+    .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #ccc;
+      padding: 10px 20px;
+      h1 {
+        margin: 0;
+      }
 
-      .leftContent{
+      .leftContent {
         display: flex;
         align-items: center;
-       
       }
-
-      .rightContent{
-
-      }
-
     }
 
-    .textEditors{
+    .textEditors {
+      padding: 1rem;
     }
-
-
   }
-  .sidebar{
+  .sidebar {
     width: 30%;
     height: 96vh;
-    overflow: auto;
+    // overflow: auto;
     border-left: 1px solid #ccc;
-    margin-left: 10px;
-    padding: 10px;
-    .header{
-      padding: 1rem 2rem;      
+    .header {
+      padding: 10px 20px;
+      h1 {
+        margin: 0;
+      }
     }
-    .quesList{
-      padding: 0.2rem 1rem;      
+    .quesList {
+      padding: 0 20px 10px 20px;
       width: 100%;
       list-style: none;
       border-bottom: 1px solid #ccc;
     }
-    
   }
 }

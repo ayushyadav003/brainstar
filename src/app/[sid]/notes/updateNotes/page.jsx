@@ -51,7 +51,7 @@ export default function UpdateNote0() {
             <div onClick={() => router.push('')}>
               <ArrowBackIcon sx={{ marginRight: '10px', cursor: 'pointer' }} />
             </div>
-            <p>Update Notes</p>
+            <h1>Create Notes</h1>
           </div>
           <div className={styles.rightContent}>
             <TextField
@@ -97,44 +97,40 @@ export default function UpdateNote0() {
         </div>
         <div>
           <div className={styles.textEditors}>
-            <div className={styles.questionEditor}>
-              <h2>Question</h2>
-              <CKEditor
-                editor={ClassicEditor}
-                data={currentNote ? currentNote.ques : ''}
-                onReady={(editor) => {
-                  console.log('Editor is ready to use!', editor)
-                }}
-                onChange={(event) => {
-                  console.log(event)
-                }}
-                onBlur={(event, editor) => {
-                  console.log('Blur.', editor)
-                }}
-                onFocus={(event, editor) => {
-                  console.log('Focus.', editor)
-                }}
-              />
-            </div>
-            <div className={styles.answerEditor}>
-              <h2>Answer</h2>
-              <CKEditor
-                editor={ClassicEditor}
-                data={currentNote ? currentNote.ans : ''}
-                onReady={(editor) => {
-                  console.log('Editor is ready to use!', editor)
-                }}
-                onChange={(event) => {
-                  console.log(event)
-                }}
-                onBlur={(event, editor) => {
-                  console.log('Blur.', editor)
-                }}
-                onFocus={(event, editor) => {
-                  console.log('Focus.', editor)
-                }}
-              />
-            </div>
+            <h3>Question</h3>
+            <CKEditor
+              editor={ClassicEditor}
+              data={currentNote ? currentNote.ques : ''}
+              onReady={(editor) => {
+                console.log('Editor is ready to use!', editor)
+              }}
+              onChange={(event) => {
+                console.log(event)
+              }}
+              onBlur={(event, editor) => {
+                console.log('Blur.', editor)
+              }}
+              onFocus={(event, editor) => {
+                console.log('Focus.', editor)
+              }}
+            />
+            <h3>Answer</h3>
+            <CKEditor
+              editor={ClassicEditor}
+              data={currentNote ? currentNote.ans : ''}
+              onReady={(editor) => {
+                console.log('Editor is ready to use!', editor)
+              }}
+              onChange={(event) => {
+                console.log(event)
+              }}
+              onBlur={(event, editor) => {
+                console.log('Blur.', editor)
+              }}
+              onFocus={(event, editor) => {
+                console.log('Focus.', editor)
+              }}
+            />
           </div>
         </div>
       </div>

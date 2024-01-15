@@ -144,48 +144,51 @@ export default function Student() {
     <div className={styles.studentsContainer}>
       <AddPopup type="students" open={addStudent} setOpen={setAddStudent} />
       <div className={styles.header}>
-        <TextField placeholder="Search with student name/username" />
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small-label">Class</InputLabel>
-          <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
-            value={''}
-            label="Class"
-            // onChange={handleChange}
+        <h1>Studens</h1>
+        <div>
+          <TextField placeholder="Student name/email/phone" />
+          <FormControl sx={{ minWidth: 120 }} size="small">
+            <InputLabel id="demo-select-small-label">Class</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              value={''}
+              label="Class"
+              // onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>10th</MenuItem>
+              <MenuItem value={20}>11th</MenuItem>
+              <MenuItem value={30}>12th</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ minWidth: 120 }} size="small">
+            <InputLabel id="demo-select-small-label">Batch</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              value={''}
+              label="Batch"
+              // onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>04:00-05:00</MenuItem>
+              <MenuItem value={20}>05:00-06:00</MenuItem>
+              <MenuItem value={30}>06:00-07:00</MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            variant="contained"
+            // style={{ marginLeft: 'auto' }}
+            onClick={() => setAddStudent(true)}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small-label">Batch</InputLabel>
-          <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
-            value={''}
-            label="Batch"
-            // onChange={handleChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <Button
-          variant="contained"
-          style={{ marginLeft: 'auto' }}
-          onClick={() => setAddStudent(true)}
-        >
-          New student
-        </Button>
+            New student
+          </Button>
+        </div>
       </div>
       <div className={styles.studentWrapper}>
         <CommonTable head={header} rows={studentData} type="students" />

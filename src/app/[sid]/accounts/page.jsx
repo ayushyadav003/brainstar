@@ -21,7 +21,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '750',
     status: 'paid',
-    currentMonth:'paid'
+    currentMonth: 'paid',
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '950',
     status: 'pending',
-    currentMonth:'pending'
+    currentMonth: 'pending',
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '650',
     status: 'paid',
-    currentMonth:'paid'
+    currentMonth: 'paid',
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '800',
     status: 'pending',
-    currentMonth:'pending'
+    currentMonth: 'pending',
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '1000',
     status: 'paid',
-    currentMonth:'paid'
+    currentMonth: 'paid',
   },
   {
     id: 6,
@@ -66,7 +66,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '700',
     status: 'pending',
-    currentMonth:'pending'
+    currentMonth: 'pending',
   },
   {
     id: 7,
@@ -75,7 +75,7 @@ const studentData = [
     batch: '04:00-05:00',
     record: '600',
     status: 'paid',
-    currentMonth:'paid'
+    currentMonth: 'paid',
   },
   {
     id: 8,
@@ -84,15 +84,22 @@ const studentData = [
     batch: '04:00-05:00',
     record: '800',
     status: 'pending',
-    currentMonth:'pending'
+    currentMonth: 'pending',
   },
- 
 ]
 export default function Accounts() {
   const [addAccount, setAddAccount] = useState(false)
   const router = useRouter()
 
-  const header = ['Sno.', 'Name', 'Class', 'Batch','Record', 'Status', 'Current Month']
+  const header = [
+    'Sno.',
+    'Name',
+    'Class',
+    'Batch',
+    'Fee',
+    // 'Last 3 months',
+    'Current Month',
+  ]
 
   return (
     <div className={styles.accountContainer}>
@@ -108,7 +115,7 @@ export default function Accounts() {
               id="demo-select-small"
               value={''}
               label="Class"
-            // onChange={handleChange}
+              // onChange={handleChange}
             >
               <MenuItem value="">
                 <em>None</em>
@@ -125,7 +132,7 @@ export default function Accounts() {
               id="demo-select-small"
               value={''}
               label="Batch"
-            // onChange={handleChange}
+              // onChange={handleChange}
             >
               <MenuItem value="">
                 <em>None</em>

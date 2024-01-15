@@ -26,7 +26,7 @@ export default function CommonTable({ head, rows, type }) {
                   {item}
                 </TableCell>
               ))}
-            <TableCell className={styles.boldCell}>{type === 'students' ? 'Action' : 'View All'}</TableCell>
+            <TableCell className={styles.boldCell}>{'Action' }</TableCell>
           </TableRow>
         </TableHead>
         <TableBody className={styles.bodyStyle}>
@@ -112,10 +112,10 @@ export default function CommonTable({ head, rows, type }) {
                     <TableCell component="th" scope="row" >
                       {row?.record}
                     </TableCell>
-                    
+{/*                     
                     <TableCell component="th" scope="row">
                       {row?.status}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell component="th" scope="row">
                       {row?.currentMonth}
                     </TableCell>

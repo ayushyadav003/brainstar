@@ -1,7 +1,7 @@
-// userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  loginPopup: false,
   userData: {},
 };
 
@@ -12,9 +12,12 @@ const userSlice = createSlice({
     setUserData: (state, action) => {
       state.userData = action.payload;
     },
+    handleLoginPopup: (state, action) => {
+      state.loginPopup = action.payload;
+    },
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, handleLoginPopup } = userSlice.actions;
 
 export default userSlice.reducer;

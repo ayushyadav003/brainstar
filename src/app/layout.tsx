@@ -1,8 +1,10 @@
 'use client'
 
 import { Inter } from 'next/font/google'
-import './globals.css'
 import { usePathname } from 'next/navigation'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import './globals.css'
 import Header from '../components/header/Header'
 import styles from './layout.module.scss'
 import Sidebar from '../components/sidebar/Sidebar'
@@ -38,6 +40,7 @@ export default function RootLayout({
             </div>
           )}
         </Provider>
+        <ToastContainer />
       </body>
     </html>
   )

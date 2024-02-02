@@ -1,6 +1,6 @@
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, FormHelperText } from '@mui/material'
 import styles from '../auth.module.scss'
 import { apiConfig } from '../../../services/ApiConfig'
 import { ApiWithToken } from '../../../services/ApiWithToken'
@@ -43,6 +43,7 @@ export default function Signup({ setNewUser }) {
   })
 
   const handleRegister = async (data) => {
+    console.log("data",data)
     delete data.confirmPassword
     const options = {
       url: apiConfig.register,
@@ -70,23 +71,25 @@ export default function Signup({ setNewUser }) {
         className={styles.signUpForm}
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          handleRegister(values)
-        }}
+        onSubmit={(values,{setSubmitting}) => {
+          handleRegister(values).catch((error)=>{
+            console.log(error)
+          }).finally(()=> setSubmitting(false))
+        }
+        }
       >
         {({
           errors,
           touched,
-          values,
+          // values,
           handleChange,
           handleBlur,
           handleSubmit,
-          setFieldValue,
+          // setFieldValue,
         }) => (
-          <>
+          <Form>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <TextField
-                variant="filled"
+              <TextField                
                 label="Full Name"
                 name="name"
                 fullWidth
@@ -94,12 +97,21 @@ export default function Signup({ setNewUser }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={touched.name && Boolean(errors.name)}
-                helperText={touched.name && errors.name}
                 size="medium"
                 margin="normal"
+                helperText={
+                  <FormHelperText
+                    error={touched.name && Boolean(errors.name)}
+                    sx={{ fontSize: '9px',  }} 
+                  >
+                    {touched.name && errors.name}
+                  </FormHelperText>
+                }
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
               />
-              <TextField
-                variant="filled"
+              <TextField                
                 label="Institute"
                 fullWidth
                 name="organisation"
@@ -110,11 +122,16 @@ export default function Signup({ setNewUser }) {
                 helperText={touched.organisation && errors.organisation}
                 size="medium"
                 margin="normal"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
               />
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <TextField
-                variant="filled"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
                 label="Email"
                 name="email"
                 required
@@ -127,7 +144,9 @@ export default function Signup({ setNewUser }) {
                 margin="normal"
               />
               <TextField
-                variant="filled"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
                 label="Mobile No."
                 name="mobile"
                 required
@@ -142,7 +161,9 @@ export default function Signup({ setNewUser }) {
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <TextField
-                variant="filled"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
                 label="Password"
                 type="password"
                 name="password"
@@ -156,7 +177,9 @@ export default function Signup({ setNewUser }) {
                 margin="normal"
               />
               <TextField
-                variant="filled"
+                InputProps={{
+                  sx: { borderRadius: '30px' },
+                }}
                 label="Confirm Password"
                 name="confirmPassword"
                 required
@@ -181,7 +204,7 @@ export default function Signup({ setNewUser }) {
             >
               Signup
             </Button>
-          </>
+          </Form>
         )}
       </Formik>
       <div className={styles.rightContent}>

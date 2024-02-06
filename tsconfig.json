@@ -29,7 +29,9 @@
     ".next/types/**/*.ts",
     "src/app/[sid]/dashboard/page.tsx",
     "src/app/[sid]/classes/page.jsx",
-    "src/components/testimonials/Testimonials.jsx"
+    "src/components/testimonials/Testimonials.jsx",
+    "src/components/header/Header.jsx",
+    "src/app/pricing/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

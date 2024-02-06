@@ -1,59 +1,41 @@
-import { Form, Formik } from 'formik'
-import * as Yup from 'yup'
-import { TextField, Button, FormHelperText } from '@mui/material'
+import { useState } from 'react'
+import {
+  TextField,
+  Button,
+  FormHelperText,
+  CircularProgress,
+} from '@mui/material'
 import styles from '../auth.module.scss'
 import { apiConfig } from '../../../services/ApiConfig'
-import { ApiWithToken } from '../../../services/ApiWithToken'
+import { ApiWithOutToken } from '../../../services/ApiWithoutToken'
 
 export default function Signup({ setNewUser }) {
-  const initialValues = {
+  const [userData, setUserData] = useState({
     email: '',
     name: '',
     organisation: '',
     mobile: '',
     password: '',
     confirmPassword: '',
-  }
-
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email('Please enter valid email address.')
-      .required('Email address is required.')
-      .min(8, 'Email address must be at least 8 characters.')
-      .max(79, 'Email address must not exceed 80 characters.'),
-    password: Yup.string()
-      .required('Password is required.')
-      .min(6, 'Password must be at least 6 characters.')
-      .max(12, 'Password must not exceed 12 characters.'),
-    name: Yup.string()
-      .required('Name is required.')
-      .min(2, 'Name must be at least 2 characters.')
-      .max(50, 'Name must not exceed 50 characters.'),
-    organisation: Yup.string()
-      .min(3, 'Institute name must be at least 3 characters.')
-      .max(50, 'Institute name must not exceed 50 characters.')
-      .required('Institute name is required.'),
-    phone: Yup.string()
-      .min(10, 'Mobile number must be atleast 10 digits.')
-      .required('Mobile number is required.'),
-    confirmPassword: Yup.string()
-      .required('Confirmation of your password is required.')
-      .oneOf([Yup.ref('password'), null], 'Passwords must match.'),
-    selectedOption: Yup.string().required('Please select an option.'),
   })
 
-  const handleRegister = async (data) => {
-    console.log("data",data)
-    delete data.confirmPassword
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    delete userData.confirmPassword
     const options = {
       url: apiConfig.register,
       method: 'POST',
-      data,
+      data: userData,
     }
-    const response = await ApiWithToken(options)
-    if (response) {
-      console.log('signup', response)
+    const data = await ApiWithOutToken(options)
+    if (data) {
+      localStorage.setItem('accessToken', data?.accessToken)
+      localStorage.setItem('refreshToken', data?.refreshToken)
     }
+  }
+
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value })
   }
 
   return (
@@ -67,146 +49,91 @@ export default function Signup({ setNewUser }) {
         </div>
       </div>
 
-      <Formik
-        className={styles.signUpForm}
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values,{setSubmitting}) => {
-          handleRegister(values).catch((error)=>{
-            console.log(error)
-          }).finally(()=> setSubmitting(false))
-        }
-        }
-      >
-        {({
-          errors,
-          touched,
-          // values,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          // setFieldValue,
-        }) => (
-          <Form>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <TextField                
-                label="Full Name"
-                name="name"
-                fullWidth
-                required
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.name && Boolean(errors.name)}
-                size="medium"
-                margin="normal"
-                helperText={
-                  <FormHelperText
-                    error={touched.name && Boolean(errors.name)}
-                    sx={{ fontSize: '9px',  }} 
-                  >
-                    {touched.name && errors.name}
-                  </FormHelperText>
-                }
-                InputProps={{
-                  sx: { borderRadius: '30px' },
-                }}
-              />
-              <TextField                
-                label="Institute"
-                fullWidth
-                name="organisation"
-                required
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.organisation && Boolean(errors.organisation)}
-                helperText={touched.organisation && errors.organisation}
-                size="medium"
-                margin="normal"
-                InputProps={{
-                  sx: { borderRadius: '30px' },
-                }}
-              />
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <TextField
-                InputProps={{
-                  sx: { borderRadius: '30px' },
-                }}
-                label="Email"
-                name="email"
-                required
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.email && Boolean(errors.email)}
-                helperText={touched.email && errors.email}
-                size="medium"
-                margin="normal"
-              />
-              <TextField
-                InputProps={{
-                  sx: { borderRadius: '30px' },
-                }}
-                label="Mobile No."
-                name="mobile"
-                required
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.mobile && Boolean(errors.mobile)}
-                helperText={touched.mobile && errors.mobile}
-                size="medium"
-                margin="normal"
-              />
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <TextField
-                InputProps={{
-                  sx: { borderRadius: '30px' },
-                }}
-                label="Password"
-                type="password"
-                name="password"
-                required
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.password && Boolean(errors.password)}
-                helperText={touched.password && errors.password}
-                size="medium"
-                margin="normal"
-              />
-              <TextField
-                InputProps={{
-                  sx: { borderRadius: '30px' },
-                }}
-                label="Confirm Password"
-                name="confirmPassword"
-                required
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={
-                  touched.confirmPassword && Boolean(errors.confirmPassword)
-                }
-                helperText={touched.confirmPassword && errors.confirmPassword}
-                type="password"
-                size="medium"
-                margin="normal"
-              />
-            </div>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              onClick={handleSubmit}
-              sx={{ borderRadius: '30px', width: '120px' }}
-            >
-              Signup
-            </Button>
-          </Form>
-        )}
-      </Formik>
+      <form className={styles.signUpForm} onSubmit={handleRegister}>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <TextField
+            label="Full Name"
+            name="name"
+            fullWidth
+            required
+            onChange={handleChange}
+            size="medium"
+            margin="normal"
+            InputProps={{
+              sx: { borderRadius: '30px' },
+            }}
+          />
+          <TextField
+            label="Institute"
+            fullWidth
+            name="organisation"
+            required
+            onChange={handleChange}
+            size="medium"
+            margin="normal"
+            InputProps={{
+              sx: { borderRadius: '30px' },
+            }}
+          />
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <TextField
+            InputProps={{
+              sx: { borderRadius: '30px' },
+            }}
+            label="Email"
+            name="email"
+            required
+            fullWidth
+            onChange={handleChange}
+            size="medium"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              sx: { borderRadius: '30px' },
+            }}
+            label="Mobile No."
+            name="mobile"
+            required
+            fullWidth
+            onChange={handleChange}
+            size="medium"
+            margin="normal"
+          />
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <TextField
+            InputProps={{
+              sx: { borderRadius: '30px' },
+            }}
+            label="Password"
+            type="password"
+            name="password"
+            required
+            fullWidth
+            onChange={handleChange}
+            size="medium"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              sx: { borderRadius: '30px' },
+            }}
+            label="Confirm Password"
+            name="confirmPassword"
+            required
+            fullWidth
+            onChange={handleChange}
+            type="password"
+            size="medium"
+            margin="normal"
+          />
+        </div>
+        <buttton className={'btn-primary'} type="submit">
+          Signup
+        </buttton>
+      </form>
       <div className={styles.rightContent}>
         <p>
           {'Already have an account? '}

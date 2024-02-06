@@ -1,12 +1,13 @@
 'use client'
 import { useState } from 'react'
-import styles from './banner.module.scss'
+import styles from './pricing.module.scss'
 import { Send } from '@mui/icons-material'
 import { Box, Button } from '@mui/material'
 import { planCards } from '@/utils/Utils'
+import CommonButton from '@/components/common/button/CommonButton'
 
 export default function Pricing() {
-  const [duration, setDuration] = useState('monthly')
+  const [duration, setDuration] = useState(1)
   const [currentPlan, setCurrentPlan] = useState('basic')
   return (
     <div className={styles.pricingContainer}>
@@ -14,11 +15,11 @@ export default function Pricing() {
         <h1>Pricing Plans</h1>
         <div>
           <span
-            onClick={() => setDuration('monthly')}
+            onClick={() => setDuration(1)}
             style={{
-              color: duration === 'monthly' ? '#fff' : 'purple',
+              color: duration === 1 ? '#fff' : 'purple',
               background:
-                duration === 'monthly'
+                duration === 1
                   ? 'linear-gradient(to right, #882ae2, #8f4de8)'
                   : '#fff',
             }}
@@ -26,11 +27,11 @@ export default function Pricing() {
             Monthly
           </span>
           <span
-            onClick={() => setDuration('yearly')}
+            onClick={() => setDuration(12)}
             style={{
-              color: duration === 'yearly' ? '#fff' : 'purple',
+              color: duration === 12 ? '#fff' : 'purple',
               background:
-                duration === 'yearly'
+                duration === 12
                   ? 'linear-gradient(to right, #882ae2, #8f4de8)'
                   : '#fff',
             }}
@@ -42,19 +43,23 @@ export default function Pricing() {
       <div className={styles.cardsContainer}>
         {planCards.map((card, index) => (
           <div className={styles.card} key={index}>
-            <h3>{card.title}</h3>
-            <p>{card.subtitle}</p>
-            <h2>{card.price}</h2>
             <div>
-              <ul>
-                {card.benefits.map((benefit, i) => (
-                  <li key={i}>
-                    <Send style={{ fontSize: '15px' }} /> {benefit}
-                  </li>
-                ))}
-              </ul>
+              <h2>{card.title}</h2>
+              <h3>
+                Rs.{' '}
+                {card.title !== 'Free'
+                  ? parseInt(card.price) * duration - duration * 100
+                  : 0}
+              </h3>
+              <Button>Buy Now</Button>
             </div>
-            <Button className={styles.btndiv}>Buy Now</Button>
+            <ul>
+              {card.benefits.map((benefit, i) => (
+                <li key={i}>
+                  <Send style={{ fontSize: '15px' }} /> {benefit}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>

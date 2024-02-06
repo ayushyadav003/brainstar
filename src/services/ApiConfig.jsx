@@ -7,4 +7,5 @@ export const apiConfig = {
   refreshToken: `${apiUrl}/Auth/login`,
 
   //students
+  student: `${apiUrl}/Student`,
 }

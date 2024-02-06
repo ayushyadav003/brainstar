@@ -1,7 +1,7 @@
 .pricingContainer {
   margin-top: 5rem;
   .banner {
-    height: 25vh;
+    height: 150px;
     background: linear-gradient(to right, #882ae2, #8f4de8, #5204e0);
     display: flex;
     flex-direction: column;
@@ -10,8 +10,8 @@
     text-align: center;
     color: #fff;
     h1 {
-      font-size: 3.6em;
-      margin: 1rem auto;
+      font-size: 3em;
+      margin: 10px auto;
     }
     div {
       border-radius: 50px;
@@ -43,60 +43,48 @@
     .card {
       border: 1px solid #ddd;
       border-radius: 10px;
-      padding: 20px;
-      width: 300px;
-      height: 360px;
-
+      width: 350px;
       text-align: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
 
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      h3 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-      }
-
-      p {
-        color: #666;
-        margin-bottom: 15px;
-      }
-
-      h2 {
-        font-size: 2em;
-        color: purple;
-        margin-bottom: 15px;
-      }
-
       div {
-        ul {
-          list-style: none;
-          padding: 10px 30px;
+        background-color: #f7f8fc;
+        padding: 20px;
+
+        h2 {
+          font-size: 1.4em;
+          color: #000;
           margin: 0;
-
-          li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 0 0 5px 0;
-
-            svg {
-              margin-right: 5px;
-            }
-          }
+        }
+        h3 {
+          font-size: 2em;
+          color: purple;
+          margin: 1rem 0;
+        }
+        button {
+          background: #000;
+          color: #fff;
+          padding: 7px 20px;
+          margin: 5px 0 0 0;
+          transition: transform 0.5s ease-in-out;
+        }
+        button:hover {
+          transform: scale(1.2);
         }
       }
 
-      .btndiv {
-        background: linear-gradient(to right, #882ae2, #8f4de8);
-        border-radius: 10px;
-        padding: 10px 30px;
-        margin: 20px auto;
-        color: #fff;
-        text-transform: capitalize;
+      ul {
+        list-style: none;
+        padding: 10px 25px;
+        margin: 2rem 0 0 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin: 0 0 5px 0;
+        }
       }
     }
   }

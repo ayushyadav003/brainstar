@@ -1,30 +1,26 @@
 .authStyle {
   display: flex;
   position: relative;
-  width: 70vw;
+  width: 60vw;
   height: 460px;
-  background-color: #fff;
+  background-color: #c3cbdc;
+  // background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   .authImg {
     width: 40%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+    height: 300px;
+    position: relative;
     padding: 0 5%;
-    align-items: center;
     color: #fff;
-    background-color: #c3cbdc;
-    background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%);
-
+    margin: auto;
     img {
-      width: 100%;
-      margin: auto;
+      height: 80%;
     }
   }
   .authForm {
     width: 60%;
     padding: 1rem 2rem;
+    background: #fff;
   }
 
   .closeButton {
@@ -114,11 +110,8 @@
 
   .signUpForm {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    Button {
-      max-width: 150px;
-      margin: 1rem auto auto auto;
-    }
   }
   .rightContent {
     display: flex;

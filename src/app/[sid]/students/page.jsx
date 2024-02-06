@@ -3,8 +3,11 @@ import React, { useState } from 'react'
 import CommonTable from '../../../components/common/Table'
 import styles from './students.module.scss'
 import {
+  Autocomplete,
   Button,
+  Dialog,
   FormControl,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -12,106 +15,11 @@ import {
 } from '@mui/material'
 import AddPopup from '@/components/addPopup/AddPopup'
 import { useRouter } from 'next/navigation'
+import { Search } from '@mui/icons-material'
+import { ApiWithToken } from '../../../services/ApiWithToken'
+import { apiConfig } from '../../../services/ApiConfig'
 
 const studentData = [
-  {
-    id: 1,
-    name: 'Ayush',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 2,
-    name: 'Ayush1',
-    phone: '9958109872',
-    class: '11th',
-    batch: '05:00-06:00',
-  },
-  {
-    id: 3,
-    name: 'Ayush2',
-    phone: '9958109872',
-    class: '10th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 4,
-    name: 'Ayush3',
-    phone: '9958109872',
-    class: '9th',
-    batch: '06:00-07:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
-  {
-    id: 5,
-    name: 'Ayush4',
-    phone: '9958109872',
-    class: '12th',
-    batch: '04:00-05:00',
-  },
   {
     id: 5,
     name: 'Ayush4',
@@ -136,17 +44,50 @@ const studentData = [
 ]
 export default function Student() {
   const [addStudent, setAddStudent] = useState(false)
+  const [newStudent, setNewStudent] = useState({
+    firstname: '',
+    lastname: '',
+    phone: '',
+    email: '',
+    class: '',
+    batch: '',
+  })
   const router = useRouter()
 
   const header = ['Sno.', 'Name', 'Phone', 'Class', 'Batch']
 
+  const addNewStudent = async () => {
+    const apiOptions = {
+      method: 'POST',
+      url: apiConfig?.student,
+      data: newStudent,
+    }
+    const data = await ApiWithToken()
+  }
+
   return (
     <div className={styles.studentsContainer}>
-      <AddPopup type="students" open={addStudent} setOpen={setAddStudent} />
+      <AddPopup
+        type="students"
+        open={addStudent}
+        setOpen={setAddStudent}
+        setvalues={setNewStudent}
+        values={newStudent}
+        action
+      />
       <div className={styles.header}>
-        <h1>Studens</h1>
+        <h1>Students</h1>
         <div>
-          <TextField placeholder="Student name/email/phone" />
+          <TextField
+            placeholder="name / email / phone"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+          />
           <FormControl sx={{ minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small-label">Class</InputLabel>
             <Select

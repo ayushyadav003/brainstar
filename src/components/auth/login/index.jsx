@@ -6,6 +6,7 @@ import {
   FormControlLabel,
   InputAdornment,
   IconButton,
+  CircularProgress,
 } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
@@ -15,13 +16,24 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import OTPInput from 'react-otp-input'
+import { apiConfig } from '../../../services/ApiConfig'
+import { ApiWithOutToken } from '../../../services/ApiWithoutToken'
+import { useDispatch } from 'react-redux'
+import { handleLoader } from '@/redux/features/userSlice'
+import { useRouter } from 'next/navigation'
 
-const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
+const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser, loader }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showOtpFields, setShowOtpFields] = useState(false)
   const [resetPassword, setResetPassword] = useState(false)
+  const [userData, setUserData] = useState({
+    email: '',
+    password: '',
+  })
   const [rememberMe, setRememberMe] = useState(false)
   const [otp, setOtp] = useState('')
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword)
@@ -31,9 +43,7 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
     setRememberMe(event.target.checked)
   }
 
-  const handleSubmit = () => {
-    setResetPassword(true)
-  }
+  const handleSubmit = () => {}
 
   const handleResetPassword = () => {
     setLoginStatus('login')
@@ -43,11 +53,40 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
     setShowOtpFields(true)
   }
 
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    dispatch(handleLoader('login'))
+
+    const options = {
+      url: apiConfig.login,
+      method: 'POST',
+      data: userData,
+    }
+    try {
+      const data = await ApiWithOutToken(options)
+
+      if (data?.data) {
+        localStorage.setItem('current-user-data', JSON.stringify(data.data))
+        router.reload()
+      } else {
+        console.error('Invalid data format:', data)
+      }
+    } catch (error) {
+      console.error('Error during login:', error)
+    } finally {
+      dispatch(handleLoader(false))
+    }
+  }
+
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value })
+  }
+
   return (
     <div className={styles.loginModal}>
       {loginStatus === 'login' && (
         <div className={styles.loginForm}>
-          <form action="">
+          <form onSubmit={handleLogin}>
             <div className={styles.heading}>
               <h2>
                 Login <span style={{ color: 'rgb(179, 179, 179)' }}> / </span>
@@ -58,9 +97,11 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
             </div>
             <div className={styles.fields}>
               <TextField
-                label="Email/Mobile No."
+                label="Email"
                 fullWidth
                 margin="normal"
+                name="email"
+                onChange={handleChange}
                 InputProps={{
                   sx: { borderRadius: '30px' },
                 }}
@@ -69,7 +110,9 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
                 label="Password"
                 type={showPassword ? 'text' : 'password'}
                 fullWidth
+                name="password"
                 margin="normal"
+                onChange={handleChange}
                 InputProps={{
                   sx: { borderRadius: '30px' },
                   endAdornment: (
@@ -110,12 +153,14 @@ const LoginPopup = ({ loginStatus, setLoginStatus, setNewUser }) => {
             </div>
             <div className={styles.bottom}>
               <Button
-                variant="contained"
-                color="primary"
-                // onClick={()}
-                sx={{ borderRadius: '30px', width: '120px' }}
+                className={'btn-primary'}
+                type="submit"
+                disabled={loader === 'login'}
               >
                 Login
+                {loader === 'login' && (
+                  <CircularProgress size={25} style={{ color: '#fff' }} />
+                )}
               </Button>
               <div className={styles.rightContent}>
                 <p>

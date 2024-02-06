@@ -3,14 +3,14 @@
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 import { ToastContainer } from 'react-toastify'
+import { Provider } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css'
 import './globals.css'
-import Header from '../components/header/Header'
+import store from '../redux/store'
 import styles from './layout.module.scss'
+import Header from '../components/header/Header'
 import Sidebar from '../components/sidebar/Sidebar'
 import Footer from '../components/footer/Footer'
-import { Provider } from 'react-redux'
-import store from '../redux/store'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()?.split('/')
+
   return (
     <html lang="en">
       <body className={inter.className}>

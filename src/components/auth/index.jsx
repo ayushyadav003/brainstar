@@ -6,6 +6,7 @@ import Login from './login'
 import Signup from './signup'
 import styles from './auth.module.scss'
 import { handleLoginPopup } from '../../redux/features/userSlice'
+import Image from 'next/image'
 
 export default function AuthPopup() {
   const [loginStatus, setLoginStatus] = useState('login')
@@ -13,7 +14,7 @@ export default function AuthPopup() {
   const dispatch = useDispatch()
 
   const {
-    user: { loginPopup },
+    user: { loginPopup, loader },
   } = useSelector(({ user }) => {
     return { user: user }
   })
@@ -26,23 +27,22 @@ export default function AuthPopup() {
     <div>
       <Dialog open={loginPopup} onClose={handleClose} maxWidth={false}>
         <div className={styles.authStyle}>
-          <Clear
-            onClick={() => setOpen(false)}
-            className={styles.closeButton}
-          />
+          <Clear onClick={handleClose} className={styles.closeButton} />
           <div className={styles.authImg}>
-            <img
-              className={styles.topImage}
+            <Image
               src={'/images/authimg.png'}
               alt=""
+              fill
+              objectFit="conatin"
             />
           </div>
           <div className={styles.authForm}>
             {newUser ? (
-              <Signup setNewUser={setNewUser} />
+              <Signup setNewUser={setNewUser} loader={loader} />
             ) : (
               <Login
                 loginStatus={loginStatus}
+                loader={loader}
                 setLoginStatus={setLoginStatus}
                 setNewUser={setNewUser}
               />

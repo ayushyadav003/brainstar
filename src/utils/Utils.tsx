@@ -75,21 +75,40 @@ export const blogs = [
 ]
 export const planCards = [
   {
-    title: 'Starter',
+    title: 'Free',
     subtitle: 'Start improving your workflow!',
-    price: '$5/mo',
-    benefits: ['Organisational tools', 'Scheduling ai', 'Productivty analysis'],
+    price: '0',
+    benefits: [
+      'Upto 50 students',
+      '1 teacher',
+      'Interactive dashboard',
+      'Student zone',
+    ],
   },
   {
     title: 'Basic',
     subtitle: 'Start improving your workflow!',
-    price: '$5/mo',
-    benefits: ['Organisational tools', 'Scheduling ai', 'Productivty analysis'],
+    price: '499/mo',
+    benefits: [
+      'Upto 200 students',
+      '5 teachers',
+      'Interactive dashboard',
+      'Student zone',
+      'Ticket Support',
+      'Landing page',
+    ],
   },
   {
     title: 'Pro',
     subtitle: 'Start improving your workflow!',
-    price: '$5/mo',
-    benefits: ['Organisational tools', 'Scheduling ai', 'Productivty analysis'],
+    price: '999/mo',
+    benefits: [
+      'Unlimited students',
+      'Unlimited teachers',
+      'Interactive dashboard',
+      'Student zone',
+      'Executive + Ticket Support',
+      'Landing page',
+    ],
   },
 ]

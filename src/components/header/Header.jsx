@@ -10,7 +10,7 @@ import AuthPopup from '../auth'
 import { handleLoginPopup, setUserData } from '../../redux/features/userSlice'
 import { useRouter } from 'next/navigation'
 
-const Header = () => {
+export default function Header() {
   const { currentUser } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const router = useRouter()
@@ -24,7 +24,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('current-user-data')
-    router.reload()
+    window.pageXOffset.reload()
   }
 
   const handleLoginClick = () => {
@@ -81,4 +81,3 @@ const Header = () => {
     </div>
   )
 }
-export default Header

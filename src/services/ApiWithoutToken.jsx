@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { toast } from 'react-toastify'
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const ApiWithOutToken = async ({ url, method, data, params }) => {
   const apiOptions = {
@@ -7,13 +7,13 @@ export const ApiWithOutToken = async ({ url, method, data, params }) => {
     method,
     data,
     params,
-  }
+  };
   try {
-    const res = await axios(apiOptions)
+    const res = await axios(apiOptions);
     if (res) {
-      return res
+      return res;
     }
   } catch (error) {
-    toast.error('Somthing went wrong!')
+    toast.error(error?.response?.data.message || "Somthing went wrong!");
   }
-}
+};

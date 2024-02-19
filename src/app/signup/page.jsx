@@ -1,30 +1,66 @@
-'use client'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Button, InputAdornment, TextField } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import styles from '../login/login.module.scss'
+"use client";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  Button,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import styles from "../login/login.module.scss";
+import Link from "next/link";
+import { apiConfig } from "@/services/ApiConfig";
+import { ApiWithOutToken } from "@/services/ApiWithoutToken";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
-  })
-  const { register, handleSubmit } = useForm()
+  });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const router = useRouter();
 
   const togglePasswordVisibility = (field) => {
-    if (field === 'password') {
-      setShowPassword({ ...showPassword, password: !showPassword.password })
+    if (field === "password") {
+      setShowPassword({ ...showPassword, password: !showPassword.password });
     } else {
       setShowPassword({
         ...showPassword,
         confirmPassword: !showPassword.confirmPassword,
-      })
+      });
     }
-  }
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  };
+  const onSubmit = async (data) => {
+    setLoading(true);
+    const apiOptions = {
+      url: apiConfig.register,
+      method: "POST",
+      data: { ...data, role: "Admin" },
+    };
+    const response = await ApiWithOutToken(apiOptions);
+    if (response?.data?.statusCode === 201) {
+      const obj = response.data.data;
+      delete obj.password;
+      delete obj._V;
+      const jsonString = JSON.stringify(obj);
+      localStorage.setItem("currentUser", jsonString);
+      toast.success(response.data.Message);
+      router.push("/");
+    } else {
+      toast.error(response.data.message);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className={styles.loginContainer}>
@@ -32,23 +68,30 @@ export default function Login() {
         <img src="/images/authimage.png" alt="" />
       </div>
       <div className={styles.loginForm}>
-        <h2 style={{ marginTop: '2rem' }}>Signup with Brainstar!</h2>
+        <h2 style={{ marginTop: "2rem" }}>Signup with Brainstar!</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{ display: "flex", gap: "1rem" }}>
             <TextField
-              label="Full Name"
+              label="Owner Name"
               fullWidth
               margin="normal"
-              {...register('fullName', {
-                required: 'Full Name is required',
+              {...register("ownerName", {
+                required: "Owner Name is required",
                 maxLength: 20,
+                minLength: 2,
               })}
+              error={!!errors.fullName}
+              helperText={errors.fullName?.message}
             />
             <TextField
               label="Institution Name"
               fullWidth
               margin="normal"
-              {...register('institute', { required: true })}
+              {...register("instituteName", {
+                required: ["Institution name is required."],
+              })}
+              error={!!errors.institute}
+              helperText={errors.institute?.message}
             />
           </div>
           <TextField
@@ -56,61 +99,63 @@ export default function Login() {
             fullWidth
             margin="normal"
             type="email"
-            {...register('email', { required: true, maxLength: 20 })}
-          />
-          <TextField
-            label="Phone"
-            fullWidth
-            margin="normal"
-            {...register('phone', {
-              required: 'Email address is required',
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: 'Invalid email address',
-              },
+            {...register("email", {
+              required: ["Email is rquired."],
+              maxLength: 20,
             })}
           />
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <TextField
-              label="Password"
-              type={showPassword.password ? 'text' : 'password'}
-              fullWidth
-              margin="normal"
-              {...register('password', {
-                required: true,
-                maxLength: 8,
-                minLength: 4,
-              })}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <span
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => togglePasswordVisibility('password')}
-                      edge="end"
-                    >
-                      {showPassword.password ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
-                    </span>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
+          <TextField
+            label="Phone (Optional)"
+            fullWidth
+            margin="normal"
+            {...register("phone", { required: false, maxLength: 10 })}
+          />
+          {/* <div style={{ display: "flex", gap: "1rem" }}> */}
+          <TextField
+            label="Craete Password"
+            type={showPassword.password ? "text" : "password"}
+            fullWidth
+            margin="normal"
+            {...register("password", {
+              required: ["Password is required."],
+              maxLength: 8,
+              minLength: 4,
+            })}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => togglePasswordVisibility("password")}
+                    edge="end"
+                  >
+                    {showPassword.password ? <VisibilityOff /> : <Visibility />}
+                  </span>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {/* <TextField
               label="Confirm Password"
-              type={showPassword.confirmPassword ? 'text' : 'password'}
+              type={showPassword.confirmPassword ? "text" : "password"}
               fullWidth
               margin="normal"
+              {...register("confirmPassword", {
+                required: ["Please confirm your password"],
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              })}
+              error={!!errors.confirmPassword}
+              helperText={errors.password?.confirmPassword}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <span
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: "pointer" }}
                       onClick={() =>
-                        togglePasswordVisibility('confirmPassword')
+                        togglePasswordVisibility("confirmPassword")
                       }
                       edge="end"
                     >
@@ -123,22 +168,26 @@ export default function Login() {
                   </InputAdornment>
                 ),
               }}
-            />
-          </div>
+            /> */}
+          {/* </div> */}
 
           <Button
             variant="contained"
-            style={{ marginTop: '1rem' }}
+            style={{ marginTop: "1rem" }}
             className={styles.loginBtn}
             type="submit"
+            disabled={loading}
           >
             Sign up
+            {loading && (
+              <CircularProgress size={30} style={{ marginLeft: "1rem" }} />
+            )}
           </Button>
         </form>
         <div className={styles.inner}>
-          Do not have an account? <button>Log in</button>
+          Do not have an account? <Link href="/login">Log in</Link>
         </div>
       </div>
     </div>
-  )
+  );
 }

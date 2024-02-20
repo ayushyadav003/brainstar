@@ -112,9 +112,10 @@
   .homeWrapper {
     margin-top: 20px;
     .introSection {
-      display: grid;
-      padding: 0 10% 0 6.9%;
-      gap: 20%;
+      margin-top: 5em;
+      display: flex;
+      flex-direction: column;
+      padding: 2em 2em 0 2em;
       .inner {
         h1 {
           font-size: 30px;
@@ -123,32 +124,39 @@
           color: #47536b;
           font-size: 18px;
           font-weight: 500;
-          margin: 0 0 35px 0;
+          margin-bottom: 1em;
+          line-height: 1.35;
+          text-align: justify;
         }
       }
       .inner2 {
         position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 2em auto;
         img {
-          width: 300px;
-          height: 300px;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
         div {
-          width: 141px;
-          height: 66px;
           position: absolute;
-          right: -45px;
-          bottom: -25px;
+          width: initial;
+          height: initial;
+          bottom: -15%;
+          right: -8%;
+          padding: 5px 10px;
           border-radius: 16px;
           background: #fff;
           box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
-          padding: 10px 20px;
           span {
             display: flex;
             align-items: center;
+
             span {
               color: #1d1d1d;
               opacity: 0.5;
-              font-size: 12px;
+              font-size: 0.8rem;
               margin-left: 4px;
               font-weight: 700;
             }
@@ -156,10 +164,10 @@
           p {
             display: flex;
             color: #1d1d1d;
-            margin: 7px 0 0 0;
-            font-size: 20px;
+            font-size: 1rem;
             font-weight: 700;
             letter-spacing: 0.2px;
+            margin-left: 0.4em;
             span {
               font-weight: 400;
             }
@@ -188,8 +196,8 @@
     }
     .servicesWrapper {
       background: #fbfbfb;
-      margin-top: 100px;
-      padding: 50px 140px;
+      padding: 0 0;
+      margin: 5em 1em;
       display: flex;
       flex-direction: column;
       text-align: center;
@@ -208,11 +216,22 @@
       }
       .servicesData {
         display: flex;
+        flex-direction: column;
+        padding: 1em;
         text-align: left;
         gap: 50px;
         margin: 60px 0;
 
+        .mobileFlex {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom:0;
+        }
+
         div {
+          border-bottom: 1px solid #6153cdbf;
+          padding-bottom: 1em;
           img {
             height: 36px;
             width: 36px;

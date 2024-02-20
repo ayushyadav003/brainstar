@@ -1,11 +1,11 @@
-'use client'
-import Image from 'next/image'
-import styles from './page.module.scss'
-import { Star } from '@mui/icons-material'
-import { services } from '../utils/Utils'
-import CommonButton from '../components/common/button/CommonButton'
-import Testimonials from '../components/testimonials/Testimonials'
-import Blogs from '@/components/blogs/Blogs'
+"use client";
+import Image from "next/image";
+import styles from "./page.module.scss";
+import { Star } from "@mui/icons-material";
+import { services } from "../utils/Utils";
+import CommonButton from "../components/common/button/CommonButton";
+import Testimonials from "../components/testimonials/Testimonials";
+import Blogs from "@/components/blogs/Blogs";
 
 export default function Home() {
   return (
@@ -22,13 +22,13 @@ export default function Home() {
               solutions that drive results and elevate your brand to new
               heights.
             </p>
-            <CommonButton text={'Get Started'} onclick={''} />
+            <CommonButton text={"Get Started"} onclick={""} />
           </div>
           <div className={styles.inner2}>
             <img src="/images/intro.png" alt="home" />
             <div>
               <span>
-                <Star style={{ color: '#F8BD38' }} />
+                <Star style={{ color: "#F8BD38" }} />
                 <span>PROJECTS</span>
               </span>
               <p>
@@ -49,18 +49,20 @@ export default function Home() {
             {services.map((item, i) => {
               return (
                 <div key={i}>
-                  <img src={item.icon} alt={item.title} />
-                  <h3>{item.title}</h3>
+                  <div className={styles.mobileFlex}>
+                    <img src={item.icon} alt={item.title} />
+                    <h3>{item.title}</h3>
+                  </div>
                   <p>{item.desc}</p>
                 </div>
-              )
+              );
             })}
           </div>
-          <CommonButton text={'Learn More'} onclick={''} />
+          <CommonButton text={"Learn More"} onclick={""} />
         </div>
         <Testimonials />
         <Blogs />
       </div>
     </main>
-  )
+  );
 }

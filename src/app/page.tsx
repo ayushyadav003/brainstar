@@ -6,8 +6,11 @@ import { services } from '../utils/Utils'
 import CommonButton from '../components/common/button/CommonButton'
 import Testimonials from '../components/testimonials/Testimonials'
 import Blogs from '@/components/blogs/Blogs'
+import { useDispatch } from 'react-redux'
+import { handleAuthPopup } from '@/redux/features/userSlice'
 
 export default function Home() {
+  const dispatch = useDispatch()
   return (
     <main className={styles.main}>
       <div className={styles.homeWrapper}>
@@ -22,7 +25,10 @@ export default function Home() {
               solutions that drive results and elevate your brand to new
               heights.
             </p>
-            <CommonButton text={'Get Started'} onclick={''} />
+            <CommonButton
+              text={'Get Started'}
+              onClick={() => dispatch(handleAuthPopup(true))}
+            />
           </div>
           <div className={styles.inner2}>
             <img src="/images/intro.png" alt="home" />
@@ -56,7 +62,7 @@ export default function Home() {
               )
             })}
           </div>
-          <CommonButton text={'Learn More'} onclick={''} />
+          <CommonButton text={'Learn More'} onClick={''} />
         </div>
         <Testimonials />
         <Blogs />

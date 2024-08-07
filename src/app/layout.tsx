@@ -11,6 +11,7 @@ import styles from './layout.module.scss'
 import Header from '../components/header/Header'
 import Sidebar from '../components/sidebar/Sidebar'
 import Footer from '../components/footer/Footer'
+import AuthPopup from '@/components/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -40,6 +41,7 @@ export default function RootLayout({
               <Footer />
             </div>
           )}
+          <AuthPopup />
         </Provider>
         <ToastContainer />
       </body>

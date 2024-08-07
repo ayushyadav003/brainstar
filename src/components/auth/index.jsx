@@ -1,54 +1,20 @@
-import { useState } from 'react'
-import { Clear } from '@mui/icons-material'
 import { Dialog } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import Login from './login'
-import Signup from './signup'
-import styles from './auth.module.scss'
-import { handleLoginPopup } from '../../redux/features/userSlice'
-import Image from 'next/image'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function AuthPopup() {
-  const [loginStatus, setLoginStatus] = useState('login')
-  const [newUser, setNewUser] = useState(false)
-  const dispatch = useDispatch()
+  const { authPopup } = useSelector(({ user }) => ({
+    authPopup: user.authPopup,
+  }))
 
-  const {
-    user: { loginPopup, loader },
-  } = useSelector(({ user }) => {
-    return { user: user }
-  })
+  console.log('authPopup', authPopup)
 
-  const handleClose = () => {
-    dispatch(handleLoginPopup(false))
-  }
+  const handleClose = () => {}
 
   return (
     <div>
-      <Dialog open={loginPopup} onClose={handleClose} maxWidth={false}>
-        <div className={styles.authStyle}>
-          <Clear onClick={handleClose} className={styles.closeButton} />
-          <div className={styles.authImg}>
-            <Image
-              src={'/images/authimg.png'}
-              alt=""
-              fill
-              objectFit="conatin"
-            />
-          </div>
-          <div className={styles.authForm}>
-            {newUser ? (
-              <Signup setNewUser={setNewUser} loader={loader} />
-            ) : (
-              <Login
-                loginStatus={loginStatus}
-                loader={loader}
-                setLoginStatus={setLoginStatus}
-                setNewUser={setNewUser}
-              />
-            )}
-          </div>
-        </div>
+      <Dialog onClose={handleClose} open={authPopup}>
+        hi
       </Dialog>
     </div>
   )

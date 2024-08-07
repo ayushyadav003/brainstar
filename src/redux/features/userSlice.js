@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  loginPopup: false,
+  authPopup: false,
   loader: false,
   currentUser: false,
 };
@@ -13,8 +13,8 @@ const userSlice = createSlice({
     setUserData: (state, action) => {
       state.currentUser = action.payload;
     },
-    handleLoginPopup: (state, action) => {
-      state.loginPopup = action.payload;
+    handleAuthPopup: (state, action) => {
+      state.authPopup = action.payload;
     },
     handleLoader: (state, action) => {
       state.loader = action.payload;
@@ -22,7 +22,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserData, handleLoginPopup, handleLoader } =
-  userSlice.actions;
+export const { setUserData, handleAuthPopup, handleLoader } = userSlice.actions;
 
 export default userSlice.reducer;

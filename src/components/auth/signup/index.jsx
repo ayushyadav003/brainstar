@@ -1,154 +1,180 @@
-import { useState } from 'react'
-import {
-  TextField,
-  Button,
-  FormHelperText,
-  CircularProgress,
-} from '@mui/material'
+import React, { useState } from 'react'
+import { InputAdornment, TextField } from '@mui/material'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import styles from '../auth.module.scss'
-import { apiConfig } from '../../../services/ApiConfig'
-import { ApiWithOutToken } from '../../../services/ApiWithoutToken'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-export default function Signup({ setNewUser }) {
-  const [userData, setUserData] = useState({
-    email: '',
-    name: '',
-    organisation: '',
-    mobile: '',
-    password: '',
-    confirmPassword: '',
+export default function SignupForm() {
+  const [showPasswrod, setShowPassword] = useState({
+    password: false,
+    confirm: false,
   })
 
-  const handleRegister = async (e) => {
-    e.preventDefault()
-    delete userData.confirmPassword
-    const options = {
-      url: apiConfig.register,
-      method: 'POST',
-      data: userData,
-    }
-    const data = await ApiWithOutToken(options)
-    if (data) {
-      localStorage.setItem('accessToken', data?.accessToken)
-      localStorage.setItem('refreshToken', data?.refreshToken)
-    }
-  }
+  const validateSchema = Yup.object().shape({
+    fullName: Yup.string().required('Full name is required'),
+    instituteName: Yup.string().required('Institute name is required'),
+    email: Yup.string()
+      .email('Please enter a valid email')
+      .required('This field is required'),
+    phoneNumber: Yup.string()
+      .required('This field is required')
+      .matches(/^\d+$/, 'Phone number must contain only digits')
+      .min(10, 'Phone number cannot be less than 10 digits')
+      .max(10, 'Phone number cannot be more than 10 digits'),
+    password: Yup.string()
+      .required('This field is required')
+      .min(5, 'Pasword must be 8 or more characters')
+      .matches(
+        /(?=.*[a-z])(?=.*[A-Z])\w+/,
+        'Password ahould contain at least one uppercase and lowercase character',
+      )
+      .matches(/\d/, 'Password should contain at least one number')
+      .matches(
+        /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/,
+        'Password should contain at least one special character',
+      ),
+    confirmPassword: Yup.string()
+      .required('This field is required')
+      .oneOf([Yup.ref('password')], 'The passwords do not match'),
+  })
+  const formik = useFormik({
+    initialValues: {
+      fullName: '',
+      instituteName: '',
+      email: '',
+      phoneNumber: null,
+      password: '',
+      confirmPassword: '',
+      roles: ['admin'],
+    },
+    validationSchema: validateSchema,
+    onSubmit: async (values) => {
+      handleSubmitForm(values)
+    },
+  })
 
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value })
-  }
+  const handleSubmitForm = (values) => {}
 
   return (
-    <div className={styles.signupModal}>
-      <div className={styles.header}>
-        <h1>
-          Sign Up<span style={{ color: 'rgb(179, 179, 179)' }}> / </span>
-        </h1>
-        <div className={styles.subheading}>
-          <h1>Login</h1>
-        </div>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        formik.handleSubmit()
+      }}
+    >
+      <div className={styles.inner}>
+        <TextField
+          label="Full name"
+          fullWidth
+          margin="normal"
+          name="fullName"
+          onChange={formik.handleChange}
+          value={formik.values.firstName}
+          onBlur={formik.handleBlur}
+          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+        />
+        <TextField
+          label="Institute name"
+          fullWidth
+          margin="normal"
+          name="instituteName"
+          onChange={formik.handleChange}
+          value={formik.values.firstName}
+          onBlur={formik.handleBlur}
+          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+        />
       </div>
-
-      <form className={styles.signUpForm} onSubmit={handleRegister}>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <TextField
-            label="Full Name"
-            name="name"
-            fullWidth
-            required
-            onChange={handleChange}
-            size="medium"
-            margin="normal"
-            InputProps={{
-              sx: { borderRadius: '30px' },
-            }}
-          />
-          <TextField
-            label="Institute"
-            fullWidth
-            name="organisation"
-            required
-            onChange={handleChange}
-            size="medium"
-            margin="normal"
-            InputProps={{
-              sx: { borderRadius: '30px' },
-            }}
-          />
-        </div>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <TextField
-            InputProps={{
-              sx: { borderRadius: '30px' },
-            }}
-            label="Email"
-            name="email"
-            required
-            fullWidth
-            onChange={handleChange}
-            size="medium"
-            margin="normal"
-          />
-          <TextField
-            InputProps={{
-              sx: { borderRadius: '30px' },
-            }}
-            label="Mobile No."
-            name="mobile"
-            required
-            fullWidth
-            onChange={handleChange}
-            size="medium"
-            margin="normal"
-          />
-        </div>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <TextField
-            InputProps={{
-              sx: { borderRadius: '30px' },
-            }}
-            label="Password"
-            type="password"
-            name="password"
-            required
-            fullWidth
-            onChange={handleChange}
-            size="medium"
-            margin="normal"
-          />
-          <TextField
-            InputProps={{
-              sx: { borderRadius: '30px' },
-            }}
-            label="Confirm Password"
-            name="confirmPassword"
-            required
-            fullWidth
-            onChange={handleChange}
-            type="password"
-            size="medium"
-            margin="normal"
-          />
-        </div>
-        <buttton className={'btn-primary'} type="submit">
-          Signup
-        </buttton>
-      </form>
-      <div className={styles.rightContent}>
-        <p>
-          {'Already have an account? '}
-          <span
-            style={{
-              cursor: 'pointer',
-              fontSize: '15px',
-              color: 'blue',
-            }}
-            onClick={() => setNewUser(false)}
-          >
-            Login
-          </span>
-        </p>
+      <div className={styles.inner}>
+        <TextField
+          label="Phone"
+          fullWidth
+          margin="normal"
+          name="phoneNumber"
+          onChange={formik.handleChange}
+          value={formik.values.firstName}
+          onBlur={formik.handleBlur}
+          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+        />
+        <TextField
+          label="Email"
+          fullWidth
+          margin="normal"
+          name="email"
+          onChange={formik.handleChange}
+          value={formik.values.firstName}
+          onBlur={formik.handleBlur}
+          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+        />
       </div>
-    </div>
+      <div className={styles.inner}>
+        <TextField
+          label="Password"
+          type={showPassword.password ? 'text' : 'password'}
+          fullWidth
+          name="password"
+          margin="normal"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          onBlur={formik.handleBlur}
+          error={Boolean(formik.touched.password && formik.errors.password)}
+          helperText={formik.touched.password ? formik.errors.password : ''}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <span
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    setShowPassword({
+                      ...showPasswrod,
+                      confirm: !showPasswrod.confirm,
+                    })
+                  }
+                >
+                  {showPassword.password ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          label="Confirm Password"
+          type={showPassword.confirm ? 'text' : 'password'}
+          fullWidth
+          name="confirmPassword"
+          margin="normal"
+          onChange={formik.handleChange}
+          value={formik.values.confirmPassword}
+          error={Boolean(
+            formik.touched.confirmPassword && formik.errors.confirmPassword,
+          )}
+          onBlur={formik.handleBlur}
+          helperText={
+            formik.touched.confirmPassword ? formik.errors.confirmPassword : ''
+          }
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <span
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    setShowPassword({
+                      ...showPasswrod,
+                      confirm: !showPasswrod.confirm,
+                    })
+                  }
+                >
+                  {showPassword.confirm ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
+    </form>
   )
 }

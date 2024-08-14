@@ -1,2 +1,17 @@
 .authWrapper {
+  padding: 1rem 2rem;
+  height: 450px;
+  width: 60vw;
+  position: relative;
+  .closeIcon {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+  }
+  .imgWrapper {
+    position: relative;
+    width: 40%;
+    height: 100%;
+  }
 }

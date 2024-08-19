@@ -1,17 +1,51 @@
 .authWrapper {
-  padding: 1rem 2rem;
-  height: 450px;
-  width: 60vw;
-  position: relative;
+  height: 480px;
+  width: 65vw;
+
+  .popupInnner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  }
   .closeIcon {
+    cursor: pointer;
     position: absolute;
     right: 1rem;
     top: 1rem;
-    cursor: pointer;
+    font-size: 1.8em;
+    z-index: 999;
   }
   .imgWrapper {
-    position: relative;
-    width: 40%;
     height: 100%;
+    width: 45%;
+    position: relative;
+    background-color: #6153cd5e;
+    img {
+      object-fit: contain;
+    }
+  }
+  .formWrapper {
+    padding: 1rem 2rem;
+    form {
+      .inner {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btnWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+          margin: 1rem 0 0 0;
+        }
+        span {
+          color: rgb(95, 46, 207);
+          cursor: pointer;
+          font-weight: 600;
+        }
+      }
+    }
   }
 }

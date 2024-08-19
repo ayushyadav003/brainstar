@@ -4,9 +4,10 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from '../auth.module.scss'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import CommonButton from '@/components/common/button/CommonButton'
 
-export default function SignupForm() {
-  const [showPasswrod, setShowPassword] = useState({
+export default function SignupForm({ setNewUser }) {
+  const [showPassword, setShowPassword] = useState({
     password: false,
     confirm: false,
   })
@@ -174,6 +175,14 @@ export default function SignupForm() {
             ),
           }}
         />
+      </div>
+      <div className={styles.btnWrapper}>
+        <CommonButton text="Submit" styles={{ margin: '1rem auto' }} />
+        <b>or</b>
+        <p>
+          Already have an account?{' '}
+          <span onClick={() => setNewUser(false)}>Login</span>
+        </p>
       </div>
     </form>
   )

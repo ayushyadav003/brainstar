@@ -1,30 +1,47 @@
-import React from "react";
-import { Dialog } from "@mui/material";
-import { useSelector } from "react-redux";
-import styles from "./auth.module.scss";
-import Image from "next/image";
-import { Close } from "@mui/icons-material";
+import React, { useState } from 'react'
+import { Dialog } from '@mui/material'
+import { Close } from '@mui/icons-material'
+import { useDispatch, useSelector } from 'react-redux'
+import Image from 'next/image'
+import styles from './auth.module.scss'
+import SignupForm from './signup/SignupForm'
+import LoginForm from './login/LoginForm'
+import CommonButton from '../common/button/CommonButton'
+import { handleAuthPopup } from '@/redux/features/userSlice'
 
 export default function AuthPopup() {
+  const [newUser, setNewUser] = useState(true)
+  const dispatch = useDispatch()
   const { authPopup } = useSelector(({ user }) => ({
     authPopup: user.authPopup,
-  }));
+  }))
 
-  console.log("authPopup", authPopup);
+  console.log('authPopup', authPopup)
 
-  const handleClose = () => {};
+  const handleClose = () => {
+    dispatch(handleAuthPopup(false))
+  }
 
   return (
     <div>
-      <Dialog onClose={handleClose} open={authPopup} maxWidth={false}>
+      <Dialog open={authPopup} maxWidth={false}>
         <div className={styles.authWrapper}>
-          <Close className={styles.closeIcon} />
-          <div className={styles.imgWrapper}>
-            <Image src="/auth.gif" fill />
+          <Close className={styles.closeIcon} onClick={handleClose} />
+          <div className={styles.popupInnner}>
+            <div className={styles.formWrapper}>
+              <h2>Login or Signup</h2>
+              {newUser ? (
+                <SignupForm setNewUser={setNewUser} />
+              ) : (
+                <LoginForm setNewUser={setNewUser} />
+              )}
+            </div>
+            <div className={styles.imgWrapper}>
+              <Image fill src="/auth.gif" alt="" />
+            </div>
           </div>
-          <div className={styles.formWrapper}></div>
         </div>
       </Dialog>
     </div>
-  );
+  )
 }

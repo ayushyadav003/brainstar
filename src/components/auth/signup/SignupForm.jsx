@@ -1,67 +1,71 @@
-import React, { useState } from 'react'
-import { InputAdornment, TextField } from '@mui/material'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import styles from '../auth.module.scss'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import CommonButton from '@/components/common/button/CommonButton'
+import React, { useState } from "react";
+import { InputAdornment, TextField } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import styles from "../auth.module.scss";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useApi } from "@/hooks/useApi";
+import CommonButton from "@/components/common/button/CommonButton";
 
 export default function SignupForm({ setNewUser }) {
+  const [isLoading, callApi] = useApi();
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirm: false,
-  })
+  });
 
   const validateSchema = Yup.object().shape({
-    fullName: Yup.string().required('Full name is required'),
-    instituteName: Yup.string().required('Institute name is required'),
+    fullName: Yup.string().required("Full name is required"),
+    instituteName: Yup.string().required("Institute name is required"),
     email: Yup.string()
-      .email('Please enter a valid email')
-      .required('This field is required'),
+      .email("Please enter a valid email")
+      .required("This field is required"),
     phoneNumber: Yup.string()
-      .required('This field is required')
-      .matches(/^\d+$/, 'Phone number must contain only digits')
-      .min(10, 'Phone number cannot be less than 10 digits')
-      .max(10, 'Phone number cannot be more than 10 digits'),
+      .required("This field is required")
+      .matches(/^\d+$/, "Phone number must contain only digits")
+      .min(10, "Phone number cannot be less than 10 digits")
+      .max(10, "Phone number cannot be more than 10 digits"),
     password: Yup.string()
-      .required('This field is required')
-      .min(5, 'Pasword must be 8 or more characters')
+      .required("This field is required")
+      .min(5, "Pasword must be 8 or more characters")
       .matches(
         /(?=.*[a-z])(?=.*[A-Z])\w+/,
-        'Password ahould contain at least one uppercase and lowercase character',
+        "Password ahould contain at least one uppercase and lowercase character"
       )
-      .matches(/\d/, 'Password should contain at least one number')
+      .matches(/\d/, "Password should contain at least one number")
       .matches(
         /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/,
-        'Password should contain at least one special character',
+        "Password should contain at least one special character"
       ),
     confirmPassword: Yup.string()
-      .required('This field is required')
-      .oneOf([Yup.ref('password')], 'The passwords do not match'),
-  })
+      .required("This field is required")
+      .oneOf([Yup.ref("password")], "The passwords do not match"),
+  });
   const formik = useFormik({
     initialValues: {
-      fullName: '',
-      instituteName: '',
-      email: '',
+      fullName: "",
+      instituteName: "",
+      email: "",
       phoneNumber: null,
-      password: '',
-      confirmPassword: '',
-      roles: ['admin'],
+      password: "",
+      roles: ["admin"],
     },
     validationSchema: validateSchema,
     onSubmit: async (values) => {
-      handleSubmitForm(values)
+      const options = {
+        methon: "POST",
+        data: values,
+      };
+      const { response, error } = callApi("signup", options);
+      console.log(response, error);
     },
-  })
-
-  const handleSubmitForm = (values) => {}
+  });
 
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault()
-        formik.handleSubmit()
+        e.preventDefault();
+        formik.handleSubmit();
       }}
     >
       <div className={styles.inner}>
@@ -74,7 +78,7 @@ export default function SignupForm({ setNewUser }) {
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
         />
         <TextField
           label="Institute name"
@@ -85,7 +89,7 @@ export default function SignupForm({ setNewUser }) {
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
         />
       </div>
       <div className={styles.inner}>
@@ -98,7 +102,7 @@ export default function SignupForm({ setNewUser }) {
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
         />
         <TextField
           label="Email"
@@ -109,13 +113,13 @@ export default function SignupForm({ setNewUser }) {
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ''}
+          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
         />
       </div>
       <div className={styles.inner}>
         <TextField
           label="Password"
-          type={showPassword.password ? 'text' : 'password'}
+          type={showPassword.password ? "text" : "password"}
           fullWidth
           name="password"
           margin="normal"
@@ -123,12 +127,12 @@ export default function SignupForm({ setNewUser }) {
           value={formik.values.password}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.password && formik.errors.password)}
-          helperText={formik.touched.password ? formik.errors.password : ''}
+          helperText={formik.touched.password ? formik.errors.password : ""}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <span
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   onClick={() =>
                     setShowPassword({
                       ...showPasswrod,
@@ -144,24 +148,24 @@ export default function SignupForm({ setNewUser }) {
         />
         <TextField
           label="Confirm Password"
-          type={showPassword.confirm ? 'text' : 'password'}
+          type={showPassword.confirm ? "text" : "password"}
           fullWidth
           name="confirmPassword"
           margin="normal"
           onChange={formik.handleChange}
           value={formik.values.confirmPassword}
           error={Boolean(
-            formik.touched.confirmPassword && formik.errors.confirmPassword,
+            formik.touched.confirmPassword && formik.errors.confirmPassword
           )}
           onBlur={formik.handleBlur}
           helperText={
-            formik.touched.confirmPassword ? formik.errors.confirmPassword : ''
+            formik.touched.confirmPassword ? formik.errors.confirmPassword : ""
           }
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <span
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   onClick={() =>
                     setShowPassword({
                       ...showPasswrod,
@@ -177,13 +181,13 @@ export default function SignupForm({ setNewUser }) {
         />
       </div>
       <div className={styles.btnWrapper}>
-        <CommonButton text="Submit" styles={{ margin: '1rem auto' }} />
+        <CommonButton text="Submit" styles={{ margin: "1rem auto" }} />
         <b>or</b>
         <p>
-          Already have an account?{' '}
+          Already have an account?{" "}
           <span onClick={() => setNewUser(false)}>Login</span>
         </p>
       </div>
     </form>
-  )
+  );
 }

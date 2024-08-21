@@ -6,9 +6,10 @@ import styles from "../auth.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useApi } from "@/hooks/useApi";
 import CommonButton from "@/components/common/button/CommonButton";
+import toast from "react-hot-toast";
 
 export default function SignupForm({ setNewUser }) {
-  const [isLoading, callApi] = useApi();
+  const { isLoading, callApi } = useApi();
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirm: false,
@@ -41,6 +42,7 @@ export default function SignupForm({ setNewUser }) {
       .required("This field is required")
       .oneOf([Yup.ref("password")], "The passwords do not match"),
   });
+
   const formik = useFormik({
     initialValues: {
       fullName: "",
@@ -48,26 +50,29 @@ export default function SignupForm({ setNewUser }) {
       email: "",
       phoneNumber: null,
       password: "",
-      roles: ["admin"],
     },
     validationSchema: validateSchema,
     onSubmit: async (values) => {
       const options = {
-        methon: "POST",
+        method: "POST",
         data: values,
       };
-      const { response, error } = callApi("signup", options);
-      console.log(response, error);
+      const { response, error } = await callApi("signup", options);
+      console.log("1", error);
+      if (error) {
+        console.log("2", error);
+        toast.error(error?.data?.message);
+      }
+      if (response?.data?.statusCode === 201) {
+        toast.success(response?.data?.message);
+      } else {
+        toast.warning(response?.data?.message);
+      }
     },
   });
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        formik.handleSubmit();
-      }}
-    >
+    <form onSubmit={formik.handleSubmit}>
       <div className={styles.inner}>
         <TextField
           label="Full name"
@@ -75,10 +80,10 @@ export default function SignupForm({ setNewUser }) {
           margin="normal"
           name="fullName"
           onChange={formik.handleChange}
-          value={formik.values.firstName}
+          value={formik.values.fullName}
           onBlur={formik.handleBlur}
-          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
+          error={Boolean(formik.touched.fullName && formik.errors.fullName)}
+          helperText={formik.touched.fullName ? formik.errors.fullName : ""}
         />
         <TextField
           label="Institute name"
@@ -86,10 +91,14 @@ export default function SignupForm({ setNewUser }) {
           margin="normal"
           name="instituteName"
           onChange={formik.handleChange}
-          value={formik.values.firstName}
+          value={formik.values.instituteName}
           onBlur={formik.handleBlur}
-          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
+          error={Boolean(
+            formik.touched.instituteName && formik.errors.instituteName
+          )}
+          helperText={
+            formik.touched.instituteName ? formik.errors.instituteName : ""
+          }
         />
       </div>
       <div className={styles.inner}>
@@ -99,10 +108,14 @@ export default function SignupForm({ setNewUser }) {
           margin="normal"
           name="phoneNumber"
           onChange={formik.handleChange}
-          value={formik.values.firstName}
+          value={formik.values.phoneNumber}
           onBlur={formik.handleBlur}
-          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
+          error={Boolean(
+            formik.touched.phoneNumber && formik.errors.phoneNumber
+          )}
+          helperText={
+            formik.touched.phoneNumber ? formik.errors.phoneNumber : ""
+          }
         />
         <TextField
           label="Email"
@@ -112,8 +125,8 @@ export default function SignupForm({ setNewUser }) {
           onChange={formik.handleChange}
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
-          error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-          helperText={formik.touched.firstName ? formik.errors.firstName : ""}
+          error={Boolean(formik.touched.email && formik.errors.email)}
+          helperText={formik.touched.email ? formik.errors.email : ""}
         />
       </div>
       <div className={styles.inner}>
@@ -135,8 +148,8 @@ export default function SignupForm({ setNewUser }) {
                   style={{ cursor: "pointer" }}
                   onClick={() =>
                     setShowPassword({
-                      ...showPasswrod,
-                      confirm: !showPasswrod.confirm,
+                      ...showPassword,
+                      confirm: !showPassword.confirm,
                     })
                   }
                 >
@@ -168,8 +181,8 @@ export default function SignupForm({ setNewUser }) {
                   style={{ cursor: "pointer" }}
                   onClick={() =>
                     setShowPassword({
-                      ...showPasswrod,
-                      confirm: !showPasswrod.confirm,
+                      ...showPassword,
+                      confirm: !showPassword.confirm,
                     })
                   }
                 >
@@ -181,7 +194,11 @@ export default function SignupForm({ setNewUser }) {
         />
       </div>
       <div className={styles.btnWrapper}>
-        <CommonButton text="Submit" styles={{ margin: "1rem auto" }} />
+        <CommonButton
+          type="submit"
+          text="Submit"
+          styles={{ margin: "1rem auto" }}
+        />
         <b>or</b>
         <p>
           Already have an account?{" "}

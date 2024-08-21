@@ -11,14 +11,14 @@ export const useApi = () => {
     try {
       setIsLoading(true);
 
-      let apiOptions = { ...options };
-      if (token) {
+      let apiOptions = { ...options, url: apiConfig[endpoint] };
+      if (options?.token) {
         apiOptions.headers = {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         };
       }
-
-      const response = await axios(apiConfig[endpoint], apiOptions);
+      console.log(apiOptions);
+      const response = await axios(apiOptions);
       return { response };
     } catch (error) {
       return { error };

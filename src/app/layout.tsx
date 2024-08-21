@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import { Inter } from 'next/font/google'
-import { usePathname } from 'next/navigation'
-import { ToastContainer } from 'react-toastify'
-import { Provider } from 'react-redux'
-import 'react-toastify/dist/ReactToastify.css'
-import './globals.css'
-import store from '../redux/store'
-import styles from './layout.module.scss'
-import Header from '../components/header/Header'
-import Sidebar from '../components/sidebar/Sidebar'
-import Footer from '../components/footer/Footer'
-import AuthPopup from '@/components/auth'
+import { Inter } from "next/font/google";
+import { usePathname } from "next/navigation";
+import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import store from "../redux/store";
+import styles from "./layout.module.scss";
+import "./globals.css";
+import Header from "../components/header/Header";
+import Sidebar from "../components/sidebar/Sidebar";
+import Footer from "../components/footer/Footer";
+import AuthPopup from "@/components/auth";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const pathname = usePathname()?.split('/')
+  const pathname = usePathname()?.split("/");
 
   return (
     <html lang="en">
@@ -43,8 +43,8 @@ export default function RootLayout({
           )}
           <AuthPopup />
         </Provider>
-        <ToastContainer />
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
-  )
+  );
 }

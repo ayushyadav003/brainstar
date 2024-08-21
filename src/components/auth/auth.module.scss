@@ -20,13 +20,14 @@
     height: 100%;
     width: 45%;
     position: relative;
-    background-color: #6153cd5e;
+    background-color: #c4beffae;
     img {
       object-fit: contain;
     }
   }
   .formWrapper {
     padding: 1rem 2rem;
+    width: 55%;
     form {
       .inner {
         display: flex;

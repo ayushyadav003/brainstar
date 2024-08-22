@@ -7,9 +7,12 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useApi } from "@/hooks/useApi";
 import CommonButton from "@/components/common/button/CommonButton";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { handleAuthPopup } from "@/redux/features/userSlice";
 
-export default function SignupForm({ setNewUser }) {
+export default function SignupForm({ setNewUser, handleClose }) {
   const { isLoading, callApi } = useApi();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirm: false,
@@ -50,22 +53,24 @@ export default function SignupForm({ setNewUser }) {
       email: "",
       phoneNumber: null,
       password: "",
+      confirmPassword: "",
     },
     validationSchema: validateSchema,
     onSubmit: async (values) => {
+      let payload = { ...values.confirmPassword };
+      delete payload.confirmPassword;
       const options = {
         method: "POST",
-        data: values,
+        data: payload,
       };
       const { response, error } = await callApi("signup", options);
-      console.log("1", error);
-      if (error) {
-        console.log("2", error);
-        toast.error(error?.data?.message);
-      }
-      if (response?.data?.statusCode === 201) {
-        toast.success(response?.data?.message);
-      } else {
+      if (error)
+        toast.error(error?.response?.data?.message || "Somthing went wrong!!");
+      else {
+        if (response?.data?.statusCode === 201) {
+          toast.success(response?.data?.message);
+          handleClose();
+        }
         toast.warning(response?.data?.message);
       }
     },
@@ -202,7 +207,7 @@ export default function SignupForm({ setNewUser }) {
         <b>or</b>
         <p>
           Already have an account?{" "}
-          <span onClick={() => setNewUser(false)}>Login</span>
+          <span onClick={() => dispatch(handleAuthPopup("login"))}>Login</span>
         </p>
       </div>
     </form>

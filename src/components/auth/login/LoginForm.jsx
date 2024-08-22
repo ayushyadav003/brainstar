@@ -6,16 +6,20 @@ import styles from "../auth.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import CommonButton from "@/components/common/button/CommonButton";
 import { useApi } from "@/hooks/useApi";
+import { useDispatch } from "react-redux";
+import { handleAuthPopup } from "@/redux/features/userSlice";
+import toast from "react-hot-toast";
 
-export default function LoginForm({ setNewUser }) {
+export default function LoginForm({ handleClose }) {
   const [showPassword, setShowPassword] = useState(false);
   const { isLoading, callApi } = useApi();
+  const dispatch = useDispatch();
 
   const validateSchema = Yup.object().shape({
     email: Yup.string()
       .email("Please enter a valid email")
       .required("This field is required"),
-    password: Yup.string()
+    enteredPassword: Yup.string()
       .required("This field is required")
       .min(5, "Pasword must be 8 or more characters")
       .matches(
@@ -31,24 +35,30 @@ export default function LoginForm({ setNewUser }) {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
-      roles: ["admin"],
+      enteredPassword: "",
+      loginType: "admin",
     },
     validationSchema: validateSchema,
     onSubmit: async (values) => {
-      handleSubmitForm(values);
+      const options = {
+        method: "POST",
+        data: values,
+      };
+      const { response, error } = await callApi("login", options);
+      if (error) {
+        toast.error(error?.response?.data?.message || "Somthing went wrong!!");
+      } else {
+        if (response?.data?.statusCode === 200) {
+          toast.success(response?.data?.message || "Welcome!");
+          handleClose();
+        }
+        toast.warning(response?.data?.message);
+      }
     },
   });
 
-  const handleSubmitForm = (values) => {};
-
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        formik.handleSubmit();
-      }}
-    >
+    <form onSubmit={formik.handleSubmit}>
       <TextField
         label="Email"
         fullWidth
@@ -64,13 +74,17 @@ export default function LoginForm({ setNewUser }) {
         label="Password"
         type={showPassword ? "text" : "password"}
         fullWidth
-        name="password"
+        name="enteredPassword"
         margin="normal"
         onChange={formik.handleChange}
-        value={formik.values.password}
+        value={formik.values.enteredPassword}
         onBlur={formik.handleBlur}
-        error={Boolean(formik.touched.password && formik.errors.password)}
-        helperText={formik.touched.password ? formik.errors.password : ""}
+        error={Boolean(
+          formik.touched.enteredPassword && formik.errors.enteredPassword
+        )}
+        helperText={
+          formik.touched.enteredPassword ? formik.errors.enteredPassword : ""
+        }
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -86,10 +100,17 @@ export default function LoginForm({ setNewUser }) {
       />
 
       <div className={styles.btnWrapper}>
-        <CommonButton text="Submit" styles={{ margin: "1rem auto" }} />
+        <CommonButton
+          type="submit"
+          text="Submit"
+          styles={{ margin: "1rem auto" }}
+        />
         <b>or</b>
         <p>
-          Not an user? <span onClick={() => setNewUser(true)}>Signup</span>
+          Not an user?{" "}
+          <span onClick={() => dispatch(handleAuthPopup("signup"))}>
+            Signup
+          </span>
         </p>
       </div>
     </form>

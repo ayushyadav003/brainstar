@@ -1,39 +1,36 @@
-import React, { useState } from 'react'
-import { Dialog } from '@mui/material'
-import { Close } from '@mui/icons-material'
-import { useDispatch, useSelector } from 'react-redux'
-import Image from 'next/image'
-import styles from './auth.module.scss'
-import SignupForm from './signup/SignupForm'
-import LoginForm from './login/LoginForm'
-import CommonButton from '../common/button/CommonButton'
-import { handleAuthPopup } from '@/redux/features/userSlice'
+import React, { useEffect, useState } from "react";
+import { Dialog } from "@mui/material";
+import { Close } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
+import styles from "./auth.module.scss";
+import SignupForm from "./signup/SignupForm";
+import LoginForm from "./login/LoginForm";
+import CommonButton from "../common/button/CommonButton";
+import { handleAuthPopup } from "@/redux/features/userSlice";
 
 export default function AuthPopup() {
-  const [newUser, setNewUser] = useState(true)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { authPopup } = useSelector(({ user }) => ({
     authPopup: user.authPopup,
-  }))
-
-  console.log('authPopup', authPopup)
+  }));
 
   const handleClose = () => {
-    dispatch(handleAuthPopup(false))
-  }
+    dispatch(handleAuthPopup(false));
+  };
 
   return (
     <div>
-      <Dialog open={authPopup} maxWidth={false}>
+      <Dialog open={authPopup} maxWidth={false} maxHeight={false}>
         <div className={styles.authWrapper}>
           <Close className={styles.closeIcon} onClick={handleClose} />
           <div className={styles.popupInnner}>
             <div className={styles.formWrapper}>
               <h2>Login or Signup</h2>
-              {newUser ? (
-                <SignupForm setNewUser={setNewUser} />
+              {authPopup === "login" ? (
+                <SignupForm handleClose={handleClose} />
               ) : (
-                <LoginForm setNewUser={setNewUser} />
+                <LoginForm handleClose={handleClose} />
               )}
             </div>
             <div className={styles.imgWrapper}>
@@ -43,5 +40,5 @@ export default function AuthPopup() {
         </div>
       </Dialog>
     </div>
-  )
+  );
 }

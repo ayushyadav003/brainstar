@@ -1,16 +1,16 @@
-'use client'
-import Image from 'next/image'
-import styles from './page.module.scss'
-import { Star } from '@mui/icons-material'
-import { services } from '../utils/Utils'
-import CommonButton from '../components/common/button/CommonButton'
-import Testimonials from '../components/testimonials/Testimonials'
-import Blogs from '@/components/blogs/Blogs'
-import { useDispatch } from 'react-redux'
-import { handleAuthPopup } from '@/redux/features/userSlice'
+"use client";
+import Image from "next/image";
+import styles from "./page.module.scss";
+import { Star } from "@mui/icons-material";
+import { services } from "../utils/Utils";
+import CommonButton from "../components/common/button/CommonButton";
+import Testimonials from "../components/testimonials/Testimonials";
+import Blogs from "@/components/blogs/Blogs";
+import { useDispatch } from "react-redux";
+import { handleAuthPopup } from "@/redux/features/userSlice";
 
 export default function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <main className={styles.main}>
       <div className={styles.homeWrapper}>
@@ -26,15 +26,17 @@ export default function Home() {
               heights.
             </p>
             <CommonButton
-              text={'Get Started'}
+              text={"Get Started"}
               onClick={() => dispatch(handleAuthPopup(true))}
+              styles={undefined}
+              type={undefined}
             />
           </div>
           <div className={styles.inner2}>
             <img src="/images/intro.png" alt="home" />
             <div>
               <span>
-                <Star style={{ color: '#F8BD38' }} />
+                <Star style={{ color: "#F8BD38" }} />
                 <span>PROJECTS</span>
               </span>
               <p>
@@ -59,14 +61,19 @@ export default function Home() {
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
-              )
+              );
             })}
           </div>
-          <CommonButton text={'Learn More'} onClick={''} />
+          <CommonButton
+            text={"Learn More"}
+            onClick={""}
+            styles={undefined}
+            type={undefined}
+          />
         </div>
         <Testimonials />
         <Blogs />
       </div>
     </main>
-  )
+  );
 }

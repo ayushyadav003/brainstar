@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Dialog } from "@mui/material";
-import { Close } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
-import styles from "./auth.module.scss";
-import SignupForm from "./signup/SignupForm";
-import LoginForm from "./login/LoginForm";
-import CommonButton from "../common/button/CommonButton";
-import { handleAuthPopup } from "@/redux/features/userSlice";
+import React, { useEffect, useState } from 'react'
+import { Dialog } from '@mui/material'
+import { Close } from '@mui/icons-material'
+import { useDispatch, useSelector } from 'react-redux'
+import Image from 'next/image'
+import styles from './auth.module.scss'
+import SignupForm from './signup/SignupForm'
+import LoginForm from './login/LoginForm'
+import CommonButton from '../common/button/CommonButton'
+import { handleAuthPopup } from '@/redux/features/userSlice'
 
 export default function AuthPopup() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { authPopup } = useSelector(({ user }) => ({
     authPopup: user.authPopup,
-  }));
+  }))
 
   const handleClose = () => {
-    dispatch(handleAuthPopup(false));
-  };
+    dispatch(handleAuthPopup(false))
+  }
 
   return (
     <div>
@@ -27,7 +27,7 @@ export default function AuthPopup() {
           <div className={styles.popupInnner}>
             <div className={styles.formWrapper}>
               <h2>Login or Signup</h2>
-              {authPopup === "login" ? (
+              {authPopup === 'signup' ? (
                 <SignupForm handleClose={handleClose} />
               ) : (
                 <LoginForm handleClose={handleClose} />
@@ -40,5 +40,5 @@ export default function AuthPopup() {
         </div>
       </Dialog>
     </div>
-  );
+  )
 }

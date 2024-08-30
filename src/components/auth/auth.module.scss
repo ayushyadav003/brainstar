@@ -16,6 +16,17 @@
           gap: 10px;
           align-items: center;
         }
+        .remember {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          a {
+            font-size: 14px;
+          }
+          a :hover {
+            color: rgb(95, 46, 207);
+          }
+        }
         .btnWrapper {
           display: flex;
           flex-direction: column;

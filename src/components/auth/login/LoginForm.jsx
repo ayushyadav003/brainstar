@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { InputAdornment, TextField } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "../auth.module.scss";
@@ -9,6 +14,7 @@ import { useApi } from "@/hooks/useApi";
 import { useDispatch } from "react-redux";
 import { handleAuthPopup } from "@/redux/features/userSlice";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function LoginForm({ handleClose }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -99,6 +105,19 @@ export default function LoginForm({ handleClose }) {
         }}
       />
 
+      <div className={styles.remember}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              // checked={rememberMe}
+              // onChange={handleRememberMe}
+              sx={{ fontSize: "1px" }}
+            />
+          }
+          label={<span style={{ fontSize: "13px" }}>Remember me</span>}
+        />
+        <Link href="/forget-password">Forgot your password?</Link>
+      </div>
       <div className={styles.btnWrapper}>
         <CommonButton
           type="submit"

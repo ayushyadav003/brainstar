@@ -28,9 +28,9 @@ export default function AuthPopup() {
             <div className={styles.formWrapper}>
               <h2>Login or Signup</h2>
               {authPopup === "login" ? (
-                <SignupForm handleClose={handleClose} />
-              ) : (
                 <LoginForm handleClose={handleClose} />
+              ) : (
+                <SignupForm handleClose={handleClose} />
               )}
             </div>
             <div className={styles.imgWrapper}>

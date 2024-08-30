@@ -23,9 +23,11 @@
     }
     .inner2 {
       position: relative;
-      width: 523px;
-      height: 361px;
-
+      width: 40%;
+      img {
+        height: 361px;
+        object-fit: contain;
+      }
       div {
         width: 141px;
         height: 66px;

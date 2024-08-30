@@ -56,9 +56,13 @@ export default function LoginForm({ handleClose }) {
       } else {
         if (response?.data?.statusCode === 200) {
           toast.success(response?.data?.message || "Welcome!");
+          localStorage.setItem(
+            "brainstarUser",
+            JSON.stringify(response?.data?.loginUser)
+          );
           handleClose();
         }
-        toast.warning(response?.data?.message);
+        // toast.warning(response?.data?.message)
       }
     },
   });

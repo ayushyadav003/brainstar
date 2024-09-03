@@ -1,63 +1,64 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AccountCircle, Logout } from '@mui/icons-material'
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from './header.module.scss'
-import CommonButton from '../common/button/CommonButton'
-import AuthPopup from '../auth'
-import { handleAuthPopup } from '../../redux/features/userSlice'
-import { useRouter } from 'next/navigation'
-import { Popover } from '@mui/material'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AccountCircle, Logout } from "@mui/icons-material";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./header.module.scss";
+import CommonButton from "../common/button/CommonButton";
+import AuthPopup from "../auth";
+import { handleAuthPopup } from "../../redux/features/userSlice";
+import { useRouter } from "next/navigation";
+import { Popover } from "@mui/material";
 
 export default function Header() {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const [currentUser, setCurrentUser] = useState(null)
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpen = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
-  const open = Boolean(anchorEl)
-  const popoverId = open ? 'simple-popover' : undefined
+  const open = Boolean(anchorEl);
+  const popoverId = open ? "simple-popover" : undefined;
 
   const headerTabs = [
-    { title: 'Home', link: '/' },
-    { title: 'About', link: '/about' },
-    { title: 'My Dashboard', link: '/institute/dashboard' },
-    { title: 'My Plan', link: '/pricing' },
-  ]
+    { title: "Home", link: "/" },
+    { title: "About", link: "/about" },
+    { title: "My Dashboard", link: "/institute/dashboard" },
+    { title: "My Plan", link: "/pricing" },
+  ];
 
   const handleLogout = () => {
-    localStorage.removeItem('brainstarUser')
-  }
+    localStorage.removeItem("brainstarUser");
+    window.location.reload();
+  };
 
   const handleGetCurrentUser = () => {
-    setCurrentUser(JSON.parse(localStorage.getItem('brainstarUser')))
-  }
+    setCurrentUser(JSON.parse(localStorage.getItem("brainstarUser")));
+  };
 
   useEffect(() => {
-    handleGetCurrentUser()
-  }, [])
+    handleGetCurrentUser();
+  }, []);
 
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrapper}>
-        <div className={styles.logo} onClick={() => router.push('/')}>
+        <div className={styles.logo} onClick={() => router.push("/")}>
           <Image src="/images/logo.png" alt="logo" width={200} height={50} />
         </div>
         <div className={styles.options}>
           {headerTabs.map((tab, i) => {
             return (
               <>
-                {tab.title !== 'My Dashboard' ? (
+                {tab.title !== "My Dashboard" ? (
                   <Link href={tab.link} key={i}>
                     {tab.title}
                   </Link>
@@ -67,7 +68,7 @@ export default function Header() {
                   </a>
                 )}
               </>
-            )
+            );
           })}
           {currentUser ? (
             <>
@@ -94,8 +95,8 @@ export default function Header() {
                 anchorEl={anchorEl}
                 onClose={handleClose}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
+                  vertical: "bottom",
+                  horizontal: "left",
                 }}
               >
                 <div className={styles.popoverWrapper}>
@@ -104,21 +105,25 @@ export default function Header() {
                       id={popoverId}
                       className={styles.profileDp}
                       onClick={handleOpen}
-                      style={{ borderRadius: '5px', marginLeft: '0' }}
+                      style={{ borderRadius: "5px", marginLeft: "0" }}
                     >
                       {currentUser?.ownerName}
                     </span>
                     <div className={styles.info}>
                       <p>
-                        <b>{currentUser?.ownerName}</b>
+                        <b>{currentUser?.fullName}</b>
                       </p>
-                      <p>{currentUser?.email}</p>
+                      <p>{currentUser?.instituteName}</p>
+                      <p>
+                        {currentUser?.email}
+                        <span>Verify</span>
+                      </p>
                     </div>
                   </div>
                   <div className={styles.inner2}>
-                    <p onClick={() => router.push('/profile')}>My Profile</p>
+                    <p onClick={() => router.push("/profile")}>My Profile</p>
                     <p
-                      style={{ color: '#f89fa4' }}
+                      style={{ color: "#f89fa4" }}
                       onClick={() => handleLogout()}
                     >
                       <Logout /> Log out
@@ -129,13 +134,13 @@ export default function Header() {
             </>
           ) : (
             <CommonButton
-              text={'Login'}
-              onClick={() => dispatch(handleAuthPopup('login'))}
+              text={"Login"}
+              onClick={() => dispatch(handleAuthPopup("login"))}
             />
           )}
         </div>
       </div>
       <AuthPopup />
     </div>
-  )
+  );
 }

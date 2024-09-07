@@ -57,7 +57,7 @@ export default function SignupForm({ setNewUser, handleClose }) {
     },
     validationSchema: validateSchema,
     onSubmit: async (values) => {
-      let payload = { ...values.confirmPassword }
+      let payload = { ...values }
       delete payload.confirmPassword
       const options = {
         method: 'POST',

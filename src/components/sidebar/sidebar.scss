@@ -1,0 +1,65 @@
+.sidebarContainer {
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
+  width: 210px;
+  overflow: auto;
+  transition: 0.3s width ease-in;
+  overflow-x: hidden;
+  border-radius: 0 8px 0 0;
+  padding: 20px 15px;
+  .sidebarOptions {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    width: 100%;
+    gap: 1rem;
+    .options {
+      display: flex;
+      background-color: #f6f7f9;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 10px 10px 30px;
+      cursor: pointer;
+      border-radius: 4px;
+      p {
+        margin: 0;
+        font-weight: 500;
+        font-size: 15px;
+      }
+    }
+  }
+}
+.mobiletouchBar {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .sidebarContainer {
+    display: none;
+  }
+  .mobiletouchBar {
+    background-color: #fff;
+    z-index: 9;
+    display: flex;
+    width: 100vw;
+    overflow: auto;
+    border: 1px solid #ddd;
+    position: fixed;
+    padding: 10px 0;
+    gap: 1rem;
+    bottom: 0;
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+      padding: 5px 8px;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

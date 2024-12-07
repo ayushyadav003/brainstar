@@ -1,0 +1,72 @@
+.popupBox {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-top: 5px solid #8493d6;
+  .field {
+  }
+  .timeWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .subSection {
+    display: flex;
+    // justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    .inner {
+      width: 100%;
+    }
+    .dayWrapper {
+      font-size: 13px;
+      border: 1px solid #dcdcdc;
+      padding: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .repeatWrapper {
+      // margin-right: auto;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .uploadWrapper, .writeNotesWrapper{
+    height: 30px;
+    background-color: #947aff;
+    color: white;
+    border-radius: 9px;
+    width: 50%;
+    font-size: larger;
+    font-weight: 400;
+    transition: all;
+    transition-duration: 0.2s;
+    &:hover{
+      cursor: pointer;
+    }
+    &:active{
+      transform: scale(0.95, 0.95);
+      background-color: #9e88f3;
+    }
+  }
+  .upload, .writeNotes{
+    width: fit-content;
+    margin: auto;
+    margin-top: 3px;
+  }
+}
+.submitBtn {
+  width: fit-content;
+  padding: 10px 50px;
+  margin: 10px auto;
+  button {
+    padding: 10px 50px;
+  }
+}

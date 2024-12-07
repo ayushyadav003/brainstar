@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f6f7f9;
+  font-family: Kumbh Sans, sans-serif;
+
+  a {
+    text-decoration: none;
+  }
+  button {
+    text-transform: capitalize !important;
+  }
+  .noData {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.closeIcon {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 16px;
+}
+h1,
+h2,
+h3 {
+  color: #301934;
+}
+p {
+  color: #483248;
+}
+.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}
